@@ -243,13 +243,6 @@ section {
     line-height: 1.1;
     margin-bottom: var(--spacing-sm);
     color: var(--text-primary);
-    opacity: 0;
-    transform: translateY(20px);
-    animation: 
-        fadeInUp 0.5s var(--transition-medium) forwards,
-        subtleGlow 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    animation-delay: 0.1s, 1s;
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero-title {
