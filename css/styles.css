@@ -235,7 +235,7 @@ section {
 }
 
 .hero-title {
-    font-size: clamp(var(--font-size-xl), 5vw, var(--font-size-2xl));
+    font-size: clamp(var(--font-size-md), 5vw, var(--font-size-2xl));
     color: var(--text-secondary);
     margin-bottom: var(--spacing-lg);
     opacity: 0;
@@ -916,7 +916,7 @@ footer {
     }
     
     .hero-name {
-        font-size: var(--font-size-md);
+        font-size: var(--font-size-2xl);
     }
     
     .portfolio-card {
