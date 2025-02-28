@@ -916,7 +916,7 @@ footer {
     }
     
     .hero-name {
-        font-size: var(--font-size-xl);
+        font-size: var(--font-size-md);
     }
     
     .portfolio-card {
