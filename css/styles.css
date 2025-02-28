@@ -230,9 +230,9 @@ section {
     0%, 100% {
         opacity: 1;
         text-shadow: 
-            0 0 10px rgba(164, 107, 255, 0.023),
-            0 0 20px rgba(163, 107, 255, 0.3),
-            0 0 30px rgba(163, 107, 255, 0.2);
+            0 0 10px rgba(255, 255, 255, 0.194),
+            0 0 20px rgba(164, 107, 255, 0.091),
+            0 0 30px rgba(255, 255, 255, 0.169);
         color: var(--text-primary);
     }
     40% {
@@ -243,7 +243,7 @@ section {
         color: rgba(240, 240, 240, 0.8);
     }
     50% {
-        opacity: 0.75;
+        opacity: 0.65;
         text-shadow: none;
         color: rgba(240, 240, 240, 0.6);
     }
