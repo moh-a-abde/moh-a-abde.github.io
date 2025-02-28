@@ -226,17 +226,6 @@ section {
     animation: fadeInUp 0.5s var(--transition-medium) forwards;
 }
 
-@keyframes subtleGlow {
-    0%, 100% {
-        text-shadow: 
-            0 0 8px rgba(163, 107, 255, 0.15);
-    }
-    50% {
-        text-shadow: 
-            0 0 12px rgba(163, 107, 255, 0.2);
-    }
-}
-
 .hero-name {
     font-size: clamp(40px, 8vw, 80px);
     font-weight: var(--font-weight-bold);
