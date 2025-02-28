@@ -230,29 +230,16 @@ section {
     0%, 100% {
         opacity: 1;
         text-shadow: 
-            0 0 10px rgba(255, 255, 255, 0.194),
-            0 0 20px rgba(164, 107, 255, 0.091),
-            0 0 30px rgba(255, 255, 255, 0.169);
+            0 0 15px rgba(163, 107, 255, 0.2),
+            0 0 30px rgba(163, 107, 255, 0.1);
         color: var(--text-primary);
     }
-    40% {
-        opacity: 0.85;
-        text-shadow: 
-            0 0 5px rgba(163, 107, 255, 0.2),
-            0 0 10px rgba(163, 107, 255, 0.1);
-        color: rgba(240, 240, 240, 0.8);
-    }
     50% {
-        opacity: 0.65;
-        text-shadow: none;
-        color: rgba(240, 240, 240, 0.6);
-    }
-    60% {
-        opacity: 0.85;
+        opacity: 0.92;
         text-shadow: 
-            0 0 5px rgba(163, 107, 255, 0.2),
-            0 0 10px rgba(163, 107, 255, 0.1);
-        color: rgba(240, 240, 240, 0.8);
+            0 0 10px rgba(163, 107, 255, 0.1),
+            0 0 20px rgba(163, 107, 255, 0.05);
+        color: rgba(240, 240, 240, 0.95);
     }
 }
 
@@ -266,9 +253,9 @@ section {
     transform: translateY(20px);
     animation: 
         fadeInUp 0.5s var(--transition-medium) forwards,
-        lightBulbFlicker 8s ease-in-out infinite;
+        lightBulbFlicker 6s ease-in-out infinite;
     animation-delay: 0.1s, 1s;
-    transition: color 0.3s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 
 .hero-title {
