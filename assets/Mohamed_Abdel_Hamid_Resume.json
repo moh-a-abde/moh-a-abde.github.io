@@ -1,0 +1,118 @@
+{
+    "name": "Mohamed A. Abdel Hamid",
+    "contact": {
+        "location": "Shoreview, MN, USA",
+        "phone": "+1 (612) 814-7908",
+        "email": "abde8473@stthomas.edu",
+        "links": {
+            "Behance": "https://www.behance.net/moh-a-abde",
+            "Github": "https://github.com/moh-a-abde",
+            "LinkedIn": "https://www.linkedin.com/in/mohamed-abdel-hamid-024526261/"
+        }
+    },
+    "education": [
+        {
+            "institution": "University of St. Thomas, St. Paul, Minnesota",
+            "degree": "B.Sc. in Computer Science",
+            "expected_graduation": "May 2025",
+            "minors": [
+                "Data Science",
+                "Psychology"
+            ],
+            "gpa": 3.23,
+            "major_gpa": 3.27,
+            "honors": [
+                "Recipient of St. Thomas academic scholarship",
+                "Dean\u2019s Honor List",
+                "Board of Trustees scholarship"
+            ]
+        },
+        {
+            "institution": "American University in Cairo",
+            "program": "Study Abroad - Computer Science & Engineering",
+            "year": 2024
+        },
+        {
+            "institution": "Arab Academy for Science & Technology, Alexandria, Egypt",
+            "program": "Cambridge IGCSE UK",
+            "years": "June 2018 \u2013 June 2021"
+        }
+    ],
+    "skills": {
+        "programming_languages": [
+            "Java",
+            "Python",
+            "C/C++",
+            "Rust",
+            "Flutter (Dart)",
+            "R",
+            "Shell Scripting (Bash)",
+            "MIPS Assembly",
+            "SQL"
+        ],
+        "web_programming": [
+            "HTML",
+            "PHP",
+            "CSS",
+            "JavaScript"
+        ],
+        "operating_systems": [
+            "Windows",
+            "Linux",
+            "Unix",
+            "Kali Linux",
+            "MacOS"
+        ],
+        "technologies": [
+            "High Performance Computing",
+            "Machine Learning and Deep Learning",
+            "Automated Github Workflows",
+            "Software Development Lifecycles",
+            "CUDA",
+            "Container Technology: Docker",
+            "Network Simulation: GNS3",
+            "Statistical Analysis: JMP Pro 16, R",
+            "Jupyter notebook; Google Colab",
+            "Graphic Design: Cinema 4D, Adobe Creative Cloud"
+        ]
+    },
+    "experience": [
+        {
+            "position": "ARMZTA Student Researcher",
+            "organization": "Indiana University of Pennsylvania, PA, USA",
+            "duration": "Summer 2024 - Present",
+            "description": "Developing a framework using federated learning to detect, respond, and mitigate cyberattacks."
+        },
+        {
+            "position": "Intern",
+            "organization": "AppSoft, Egypt",
+            "duration": "Jan 2024",
+            "description": "Learned Flutter mobile development and Oracle Apex."
+        },
+        {
+            "position": "Research Participant",
+            "organization": "Old Dominion University, VA, USA",
+            "duration": "Summer 2023",
+            "description": "Researched Backdoor Attacks and Model Manipulation in AI; attended DeapSECURE workshop."
+        }
+    ],
+    "projects": [
+        "Password cracking using brute force attacks in Bash/Python",
+        "Data analysis project on graduate school acceptance",
+        "Exploratory Factory Analysis on a movie dataset using R",
+        "Survival analysis using decision trees and neural networks",
+        "Web scraping a programming competitions website",
+        "Implemented a process manager for Ubuntu using Rust",
+        "Developed a tour guide application with Gemini AI using Flutter"
+    ],
+    "languages": [
+        "English",
+        "Arabic"
+    ],
+    "hobbies": [
+        "Basketball",
+        "Soccer",
+        "Weightlifting/Gym",
+        "Digital Music Production (FL Studio)"
+    ]
+}
