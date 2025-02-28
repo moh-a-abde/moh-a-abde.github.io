@@ -226,6 +226,51 @@ section {
     animation: fadeInUp 0.5s var(--transition-medium) forwards;
 }
 
+@keyframes lightBulbFlicker {
+    0%, 100% {
+        opacity: 1;
+        text-shadow: 
+            0 0 10px rgba(163, 107, 255, 0.3),
+            0 0 20px rgba(163, 107, 255, 0.2),
+            0 0 30px rgba(163, 107, 255, 0.1);
+    }
+    5% {
+        opacity: 0.8;
+        text-shadow: none;
+    }
+    10% {
+        opacity: 1;
+        text-shadow: 
+            0 0 15px rgba(163, 107, 255, 0.4),
+            0 0 25px rgba(163, 107, 255, 0.3),
+            0 0 35px rgba(163, 107, 255, 0.2);
+    }
+    15% {
+        opacity: 0.9;
+        text-shadow: 
+            0 0 5px rgba(163, 107, 255, 0.2),
+            0 0 15px rgba(163, 107, 255, 0.1);
+    }
+    25% {
+        opacity: 1;
+        text-shadow: 
+            0 0 10px rgba(163, 107, 255, 0.3),
+            0 0 20px rgba(163, 107, 255, 0.2),
+            0 0 30px rgba(163, 107, 255, 0.1);
+    }
+    30% {
+        opacity: 0.85;
+        text-shadow: none;
+    }
+    35% {
+        opacity: 1;
+        text-shadow: 
+            0 0 15px rgba(163, 107, 255, 0.4),
+            0 0 25px rgba(163, 107, 255, 0.3),
+            0 0 35px rgba(163, 107, 255, 0.2);
+    }
+}
+
 .hero-name {
     font-size: clamp(40px, 8vw, 80px);
     font-weight: var(--font-weight-bold);
@@ -234,11 +279,10 @@ section {
     color: var(--text-primary);
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeInUp 0.5s var(--transition-medium) forwards, textGlow 2s ease-in-out infinite alternate;
-    animation-delay: 0.1s;
-    text-shadow: 0 0 10px rgba(163, 107, 255, 0.3),
-                 0 0 20px rgba(163, 107, 255, 0.2),
-                 0 0 30px rgba(163, 107, 255, 0.1);
+    animation: 
+        fadeInUp 0.5s var(--transition-medium) forwards,
+        lightBulbFlicker 4s ease-in-out infinite;
+    animation-delay: 0.1s, 1s;
 }
 
 .hero-title {
