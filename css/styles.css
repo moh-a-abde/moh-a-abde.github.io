@@ -230,7 +230,7 @@ section {
     0%, 100% {
         opacity: 1;
         text-shadow: 
-            0 0 10px rgba(163, 107, 255, 0.4),
+            0 0 10px rgba(164, 107, 255, 0.023),
             0 0 20px rgba(163, 107, 255, 0.3),
             0 0 30px rgba(163, 107, 255, 0.2);
         color: var(--text-primary);
@@ -349,8 +349,8 @@ section {
 }
 
 .resume-button svg {
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     transition: transform var(--transition-medium);
 }
 
@@ -953,7 +953,7 @@ footer {
     }
     
     .hero-name {
-        font-size: var(--font-size-3xl);
+        font-size: var(--font-size-2xl);
     }
     
     .portfolio-card {
