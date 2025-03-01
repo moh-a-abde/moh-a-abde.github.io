@@ -185,8 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create particles when the page loads
     window.addEventListener('load', createParticles);
 
-    // Modal functionality for cards
-    const portfolioCards = document.querySelectorAll('.portfolio-card');
+    // Modal functionality for cards (excluding contact card)
+    const portfolioCards = document.querySelectorAll('.portfolio-card:not(.contact-card)');
 
     // Create modal container
     const modalContainer = document.createElement('div');
@@ -285,6 +285,85 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             // You would replace this URL with the actual path to your resume file
             window.open('https://drive.usercontent.google.com/u/1/uc?id=1ZcTSZnA6dRBQ7ynsO2lpi0RWuyK1xvQD&export=download', '_blank');
+        });
+    }
+
+    // Contact form submission handler
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Basic validation
+            if (!name || !email || !message) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Create form data object
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('message', message);
+            
+            // Show loading state
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
+            submitButton.innerHTML = '<span>Sending...</span>';
+            submitButton.disabled = true;
+            
+            // Send data to server using fetch API
+            fetch('process_form.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Create success message container
+                const successMessage = document.createElement('div');
+                successMessage.className = 'success-message';
+                successMessage.innerHTML = `
+                    <div class="fancy-button-wrap">
+                        <div class="button-shadow"></div>
+                        <div class="fancy-button">
+                            <span>
+                                Thanks for your message, ${name}!<br>
+                                I'll get back to you soon.
+                            </span>
+                        </div>
+                    </div>
+                `;
+                
+                // Replace form with success message
+                contactForm.innerHTML = '';
+                contactForm.appendChild(successMessage);
+                
+                // Add the clickable effect without redirecting
+                const fancyButton = successMessage.querySelector('.fancy-button');
+                if (fancyButton) {
+                    fancyButton.addEventListener('click', function() {
+                        // Just add a visual feedback effect
+                        this.classList.add('clicked');
+                        setTimeout(() => {
+                            this.classList.remove('clicked');
+                        }, 300);
+                    });
+                }
+            })
+            .catch(error => {
+                // Reset button state
+                submitButton.innerHTML = originalButtonText;
+                submitButton.disabled = false;
+                
+                // Show error message
+                alert('Sorry, there was an error sending your message. Please try again later.');
+                console.error('Error:', error);
+            });
         });
     }
 }); 

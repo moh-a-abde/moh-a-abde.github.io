@@ -5,6 +5,19 @@
     font-style: normal;
 }
 
+/* Defs for Fancy Button */
+@property --angle-1 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: -75deg;
+}
+
+@property --angle-2 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: -45deg;
+}
+
 :root {
 
     /* Spacing */
@@ -58,6 +71,11 @@
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
+    
+    /* Fancy Button Variables */
+    --global--size: clamp(1rem, 1.5vw, 1.5rem);
+    --anim--hover-time: 400ms;
+    --anim--hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 * {
@@ -212,7 +230,7 @@ section {
 .hero-content {
     max-width: 1000px;
     margin: 0 auto;
-    text-align: left;
+    text-align: center;
     padding: var(--spacing-xl) 0;
 }
 
@@ -235,7 +253,7 @@ section {
 }
 
 .hero-title {
-    font-size: clamp(var(--font-size-md), 5vw, var(--font-size-2xl));
+    font-size: clamp(var(--font-size-xs), 5vw, var(--font-size-md));
     color: var(--text-secondary);
     margin-bottom: var(--spacing-lg);
     opacity: 0;
@@ -245,8 +263,8 @@ section {
 }
 
 .hero-description {
-    max-width: 540px;
-    margin: 0;
+    max-width: 80%;
+    margin: 0 auto;
     margin-bottom: var(--spacing-xl);
     color: var(--text-secondary);
     font-size: var(--font-size-lg);
@@ -255,6 +273,11 @@ section {
     transform: translateY(20px);
     animation: fadeInUp 0.5s var(--transition-medium) forwards;
     animation-delay: 0.3s;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .hero-buttons {
@@ -262,6 +285,21 @@ section {
     gap: var(--spacing-md);
     align-items: center;
     margin-top: var(--spacing-xl);
+    justify-content: center;
+}
+
+.hero-buttons .fancy-button-wrap {
+    min-width: 180px;
+    margin-right: var(--spacing-md);
+}
+
+.hero-buttons .fancy-button-wrap:last-child {
+    margin-right: 0;
+}
+
+.hero-buttons .fancy-button {
+    width: 100%;
+    text-align: center;
 }
 
 .cta-button {
@@ -287,38 +325,6 @@ section {
     background-color: rgba(163, 107, 255, 0.1);
     outline: none;
     transform: translateY(-2px);
-}
-
-.resume-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    background: transparent;
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    padding: 1.0rem 1.50rem;
-    border-radius: 4px;
-    font-family: var(--font-family-mono);
-    font-size: var(--font-size-sm);
-    text-decoration: none;
-    transition: all var(--transition-medium);
-    min-width: 150px;
-}
-
-.resume-button:hover {
-    background: rgba(163, 107, 255, 0.1);
-    transform: translateY(-2px);
-}
-
-.resume-button svg {
-    width: 15px;
-    height: 15px;
-    transition: transform var(--transition-medium);
-}
-
-.resume-button:hover svg {
-    transform: translateY(-0.1px);
 }
 
 .section-title {
@@ -384,6 +390,10 @@ section {
     transition: all var(--transition-medium);
     border: 1px solid rgba(163, 107, 255, 0.1);
     animation: float 6s ease-in-out infinite;
+}
+
+.portfolio-card:not(.contact-card) {
+    cursor: pointer;
 }
 
 .portfolio-card::before {
@@ -664,6 +674,11 @@ section {
     margin: 0 auto;
 }
 
+.contact-form .fancy-button-wrap {
+    align-self: flex-start;
+    margin-top: var(--spacing-sm);
+}
+
 .form-group {
     display: flex;
     flex-direction: column;
@@ -907,6 +922,11 @@ footer {
     .container {
         grid-template-columns: repeat(2, minmax(var(--card-width), 1fr));
     }
+
+    .hero-description {
+        -webkit-line-clamp: 2;
+        max-width: 90%;
+    }
 }
 
 @media (max-width: 900px) {
@@ -953,6 +973,11 @@ footer {
     .mobile-menu-btn {
         display: block;
     }
+
+    .hero-description {
+        -webkit-line-clamp: 3;
+        white-space: normal;
+    }
 }
 
 @media (max-width: 768px) {
@@ -989,15 +1014,34 @@ footer {
 
     .hero-buttons {
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
         gap: var(--spacing-md);
         width: 100%;
     }
 
-    .cta-button,
-    .resume-button {
+    .hero-buttons .fancy-button-wrap,
+    .contact-form .fancy-button-wrap {
         width: 100%;
-        justify-content: center;
+        min-width: 100%;
+        display: block;
+        margin-right: 0;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .hero-buttons .fancy-button-wrap:last-child {
+        margin-bottom: 0;
+    }
+    
+    .hero-buttons .fancy-button,
+    .contact-form .fancy-button {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+    
+    .hero-description {
+        -webkit-line-clamp: 4;
+        max-width: 100%;
     }
 }
 
@@ -1135,4 +1179,314 @@ html {
                      0 0 30px rgba(164, 107, 255, 0.049),
                      0 0 45px rgba(164, 107, 255, 0.033);
     }
+}
+
+/* ========== FANCY BUTTON STYLES ========== */
+
+/* Button Wrap Container */
+.fancy-button-wrap {
+    position: relative;
+    z-index: 2;
+    border-radius: 999vw;
+    background: transparent;
+    pointer-events: none;
+    transition: all var(--anim--hover-time) var(--anim--hover-ease);
+    display: inline-block;
+}
+
+/* Button Shadow Container */
+.button-shadow {
+    --shadow-cuttoff-fix: 2em;
+    position: absolute;
+    width: calc(100% + var(--shadow-cuttoff-fix));
+    height: calc(100% + var(--shadow-cuttoff-fix));
+    top: calc(0% - var(--shadow-cuttoff-fix) / 2);
+    left: calc(0% - var(--shadow-cuttoff-fix) / 2);
+    filter: blur(clamp(2px, 0.125em, 12px));
+    -webkit-filter: blur(clamp(2px, 0.125em, 12px));
+    -moz-filter: blur(clamp(2px, 0.125em, 12px));
+    -ms-filter: blur(clamp(2px, 0.125em, 12px));
+    overflow: visible;
+    pointer-events: none;
+}
+
+/* Shadow */
+.button-shadow::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    border-radius: 999vw;
+    background: linear-gradient(180deg, rgba(163, 107, 255, 0.2), rgba(83, 54, 130, 0.3));
+    width: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
+    height: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
+    top: calc(var(--shadow-cuttoff-fix) - 0.5em);
+    left: calc(var(--shadow-cuttoff-fix) - 0.875em);
+    padding: 0.125em;
+    box-sizing: border-box;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    transition: all var(--anim--hover-time) var(--anim--hover-ease);
+    overflow: visible;
+    opacity: 1;
+}
+
+/* ========== FANCY BUTTON BASE STYLES ========== */
+
+.fancy-button {
+    /* Basic Styling */
+    --border-width: clamp(1px, 0.0625em, 4px);
+    all: unset;
+    cursor: pointer;
+    position: relative;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    pointer-events: auto;
+    z-index: 3;
+    background: linear-gradient(
+        -75deg,
+        rgba(163, 107, 255, 0.05),
+        rgba(163, 107, 255, 0.2),
+        rgba(163, 107, 255, 0.05)
+    );
+    border-radius: 999vw;
+    box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.1),
+        inset 0 -0.125em 0.125em rgba(163, 107, 255, 0.3),
+        0 0.25em 0.125em -0.125em rgba(0, 0, 0, 0.3),
+        0 0 0.1em 0.25em inset rgba(163, 107, 255, 0.1),
+        0 0 0 0 rgba(163, 107, 255, 0.5);
+    backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+    -webkit-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+    -moz-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+    -ms-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+    transition: all var(--anim--hover-time) var(--anim--hover-ease);
+    display: inline-block;
+    text-decoration: none;
+}
+
+.fancy-button:hover {
+    transform: scale(0.975);
+    backdrop-filter: blur(0.01em);
+    -webkit-backdrop-filter: blur(0.01em);
+    -moz-backdrop-filter: blur(0.01em);
+    -ms-backdrop-filter: blur(0.01em);
+    box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.1),
+        inset 0 -0.125em 0.125em rgba(163, 107, 255, 0.4),
+        0 0.15em 0.05em -0.1em rgba(0, 0, 0, 0.3),
+        0 0 0.05em 0.1em inset rgba(163, 107, 255, 0.3),
+        0 0 0 0 rgba(163, 107, 255, 0.5);
+}
+
+/* Button Text */
+.fancy-button span {
+    position: relative;
+    display: block;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    font-family: 'Minecraft', sans-serif;
+    letter-spacing: -0.05em;
+    font-weight: 500;
+    font-size: 1em;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-shadow: 0em 0.25em 0.05em rgba(0, 0, 0, 0.2);
+    transition: all var(--anim--hover-time) var(--anim--hover-ease);
+    padding-inline: 2.5em;
+    padding-block: 0.875em;
+}
+
+.fancy-button:hover span {
+    text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.12);
+}
+
+/* Text */
+.fancy-button span::after {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1;
+    width: calc(100% - var(--border-width)); /* Prevent overlapping border */
+    height: calc(100% - var(--border-width));
+    top: calc(0% + var(--border-width) / 2);
+    left: calc(0% + var(--border-width) / 2);
+    box-sizing: border-box;
+    border-radius: 999vw;
+    overflow: clip;
+    background: linear-gradient(
+        var(--angle-2),
+        rgba(163, 107, 255, 0) 0%,
+        rgba(163, 107, 255, 0.5) 40% 50%,
+        rgba(163, 107, 255, 0) 55%
+    );
+    z-index: 3;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    background-repeat: no-repeat;
+    transition: background-position calc(var(--anim--hover-time) * 1.25)
+        var(--anim--hover-ease),
+        --angle-2 calc(var(--anim--hover-time) * 1.25) var(--anim--hover-ease);
+}
+
+.fancy-button:hover span::after {
+    background-position: 25% 50%;
+}
+
+.fancy-button:active span::after {
+    background-position: 50% 15%;
+    --angle-2: -15deg;
+}
+
+/* Touch Devices */
+@media (hover: none) and (pointer: coarse) {
+    .fancy-button span::after,
+    .fancy-button:active span::after {
+        --angle-2: -45deg;
+    }
+}
+
+/* ========== BUTTON OUTLINE ========== */
+
+/* Outline */
+.fancy-button::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    border-radius: 999vw;
+    width: calc(100% + var(--border-width));
+    height: calc(100% + var(--border-width));
+    top: calc(0% - var(--border-width) / 2);
+    left: calc(0% - var(--border-width) / 2);
+    padding: var(--border-width);
+    box-sizing: border-box;
+    background: conic-gradient(
+        from var(--angle-1) at 50% 50%,
+        rgba(163, 107, 255, 0.7),
+        rgba(83, 54, 130, 0.3) 5% 40%,
+        rgba(163, 107, 255, 0.7) 50%,
+        rgba(83, 54, 130, 0.3) 60% 95%,
+        rgba(163, 107, 255, 0.7)
+    ),
+    linear-gradient(180deg, rgba(163, 107, 255, 0.5), rgba(83, 54, 130, 0.3));
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    transition: all var(--anim--hover-time) var(--anim--hover-ease),
+        --angle-1 500ms ease;
+    box-shadow: inset 0 0 0 calc(var(--border-width) / 2) rgba(163, 107, 255, 0.5);
+}
+
+.fancy-button:hover::after {
+    --angle-1: -125deg;
+}
+
+.fancy-button:active::after {
+    --angle-1: -75deg;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .fancy-button::after,
+    .fancy-button:hover::after,
+    .fancy-button:active::after {
+        --angle-1: -75deg;
+    }
+}
+
+/* Shadow Hover */
+.fancy-button-wrap:has(.fancy-button:hover) .button-shadow {
+    filter: blur(clamp(2px, 0.0625em, 6px));
+    -webkit-filter: blur(clamp(2px, 0.0625em, 6px));
+    -moz-filter: blur(clamp(2px, 0.0625em, 6px));
+    -ms-filter: blur(clamp(2px, 0.0625em, 6px));
+    transition: filter var(--anim--hover-time) var(--anim--hover-ease);
+}
+
+.fancy-button-wrap:has(.fancy-button:hover) .button-shadow::after {
+    top: calc(var(--shadow-cuttoff-fix) - 0.875em);
+    opacity: 1;
+    background: linear-gradient(180deg, rgba(163, 107, 255, 0.3), rgba(83, 54, 130, 0.4));
+}
+
+/* Rotation */
+.fancy-button-wrap:has(.fancy-button:active) {
+    transform: rotate3d(1, 0, 0, 25deg);
+}
+
+.fancy-button-wrap:has(.fancy-button:active) .fancy-button {
+    box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.1),
+        inset 0 -0.125em 0.125em rgba(163, 107, 255, 0.3),
+        0 0.125em 0.125em -0.125em rgba(0, 0, 0, 0.3),
+        0 0 0.1em 0.25em inset rgba(163, 107, 255, 0.2),
+        0 0.225em 0.05em 0 rgba(0, 0, 0, 0.1),
+        0 0.25em 0 0 rgba(83, 54, 130, 0.3),
+        inset 0 0.25em 0.05em 0 rgba(0, 0, 0, 0.2);
+}
+
+.fancy-button-wrap:has(.fancy-button:active) .button-shadow {
+    filter: blur(clamp(2px, 0.125em, 12px));
+    -webkit-filter: blur(clamp(2px, 0.125em, 12px));
+    -moz-filter: blur(clamp(2px, 0.125em, 12px));
+    -ms-filter: blur(clamp(2px, 0.125em, 12px));
+}
+
+.fancy-button-wrap:has(.fancy-button:active) .button-shadow::after {
+    top: calc(var(--shadow-cuttoff-fix) - 0.5em);
+    opacity: 0.75;
+    background: linear-gradient(180deg, rgba(163, 107, 255, 0.4), rgba(83, 54, 130, 0.5));
+}
+
+.fancy-button-wrap:has(.fancy-button:active) span {
+    text-shadow: 0.025em 0.25em 0.05em rgba(0, 0, 0, 0.12);
+}
+
+/* SVG inside fancy button */
+.fancy-button svg {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
+    transition: transform var(--transition-medium);
+    stroke: var(--text-primary);
+}
+
+.fancy-button:hover svg {
+    transform: translateY(-2px);
+}
+
+/* Make the resume button wider */
+.hero-buttons .fancy-button-wrap:last-child .fancy-button span {
+    padding-inline: 2.5em;
+}
+
+/* Contact card specific styles */
+.contact-card {
+    cursor: default;
+}
+
+.contact-card .fancy-button {
+    cursor: pointer;
+}
+
+/* Success message styling */
+.success-message {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: var(--spacing-lg);
+}
+
+.success-message .fancy-button-wrap {
+    min-width: 250px;
+}
+
+.fancy-button.clicked {
+    transform: scale(0.95);
+    box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.2),
+        inset 0 -0.125em 0.125em rgba(163, 107, 255, 0.5),
+        0 0.1em 0.05em -0.1em rgba(0, 0, 0, 0.4),
+        0 0 0.05em 0.1em inset rgba(163, 107, 255, 0.4);
 } 

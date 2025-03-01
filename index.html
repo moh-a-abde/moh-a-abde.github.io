@@ -27,20 +27,32 @@
 
     <section class="hero" id="home">
         <div class="hero-content">
-            <div class="greeting">Hello, I'm</div>
+            <div class="greeting">Welcome to my portfolio!</div>
             <h1 class="hero-name">Mohamed Abdel Hamid</h1>
-            <h2 class="hero-title">Computer Science Student</h2>
+            <h2 class="hero-title">Machine Learning | Research and Development | Full Stack Development | Cybersecurity</h2>
             <p class="hero-description">Computer Science student at the University of St. Thomas with experience in research, software development, and a passion for AI and cybersecurity.</p>
             <div class="hero-buttons">
-                <a href="#contact" class="cta-button">Get In Touch</a>
-                <a href="https://drive.usercontent.google.com/u/1/uc?id=1ZcTSZnA6dRBQ7ynsO2lpi0RWuyK1xvQD&export=download" class="resume-button" target="_blank" download>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    Resume
-                </a>
+                <div class="fancy-button-wrap">
+                    <div class="button-shadow"></div>
+                    <a href="#contact" class="fancy-button">
+                        <span>
+                            Get In Touch
+                        </span>
+                    </a>
+                </div>
+                <div class="fancy-button-wrap">
+                    <div class="button-shadow"></div>
+                    <a href="https://drive.usercontent.google.com/u/1/uc?id=1ZcTSZnA6dRBQ7ynsO2lpi0RWuyK1xvQD&export=download" class="fancy-button" target="_blank" download>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; margin-right: 8px; vertical-align: middle;">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Resume
+                        </span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -64,16 +76,16 @@
                     <div class="card-footer">
                         <div class="details">
                             <div class="detail-item">
-                                <div class="detail-value">Languages</div>
-                                <div class="detail-label">English, Arabic</div>
+                                <div class="detail-value">English, Arabic</div>
+                                <div class="detail-label">Languages</div>
                             </div>
                             <div class="detail-item">
-                                <div class="detail-value">Location</div>
-                                <div class="detail-label">MN</div>
+                                <div class="detail-value">MN</div>
+                                <div class="detail-label">Location</div>
                             </div>
                             <div class="detail-item">
-                                <div class="detail-value">Hobbies</div>
-                                <div class="detail-label">Reading,Basketball, Soccer, Weightlifting, Music Production</div>
+                                <div class="detail-value">Reading,Basketball, Soccer, Weightlifting, Music Production</div>
+                                <div class="detail-label">Hobbies</div>
                             </div>
                         </div>
                     </div>
@@ -101,15 +113,15 @@
                     <div class="card-footer">
                         <div class="details">
                             <div class="detail-item">
-                                <div class="detail-value">Research</div>
+                                <div class="detail-value">Research and Development</div>
                                 <div class="detail-label">Focus</div>
                             </div>
                             <div class="detail-item">
-                                <div class="detail-value">Cybersecurity</div>
+                                <div class="detail-value">Cybersecurity, Networks, Machine Learning, Intrustion Detection</div>
                                 <div class="detail-label">Field</div>
                             </div>
                             <div class="detail-item">
-                                <div class="detail-value">Federated Learning</div>
+                                <div class="detail-value">Federated Learning, Continous Machine Learning</div>
                                 <div class="detail-label">Technology</div>
                             </div>
                         </div>
@@ -418,24 +430,29 @@
                         <div class="contact-info">
                             <p><strong>Email:</strong> abde8473@stthomas.edu</p>
                             <p><strong>Phone:</strong> +1 (612) 814-7908</p>
-                            <p><strong>Location:</strong> Shoreview, MN, USA</p>
+                            <p><strong>Location:</strong> MN, USA</p>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <form class="contact-form">
+                        <form class="contact-form" method="post" action="process_form.php">
                             <div class="form-group">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" id="name" class="form-input" placeholder="Your Name">
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Your Name" required>
                             </div>
                             <div class="form-group">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" id="email" class="form-input" placeholder="Your Email">
+                                <input type="email" id="email" name="email" class="form-input" placeholder="Your Email" required>
                             </div>
                             <div class="form-group">
                                 <label for="message" class="form-label">Message</label>
-                                <textarea id="message" class="form-textarea" placeholder="Your Message"></textarea>
+                                <textarea id="message" name="message" class="form-textarea" placeholder="Your Message" required></textarea>
                             </div>
-                            <button type="submit" class="form-button">Send Message</button>
+                            <div class="fancy-button-wrap">
+                                <div class="button-shadow"></div>
+                                <button type="submit" class="fancy-button">
+                                    <span>Send Message</span>
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -455,7 +472,5 @@
     <a href="#home" class="back-to-top">↑</a>
 
     <script src="js/main.js"></script>
-</body>
-</html> 
 </body>
 </html> 

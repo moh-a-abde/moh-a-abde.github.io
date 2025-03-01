@@ -1,33 +1,63 @@
-# Portfolio Website
+# Mohamed Abdel Hamid - Portfolio Website
 
-## Project Structure
-
-
-```
-portfolio/
-├── index.html          # Main HTML file
-├── css/
-│   └── styles.css      # Styles for the website
-├── js/
-│   └── main.js         # JavaScript functionality
-└── assets/             # For images, icons, etc.
-```
+This is the source code for my personal portfolio website, showcasing my skills, projects, and experience.
 
 ## Features
 
-- Responsive design that works on all screen sizes
-- Modern UI with smooth animations and transitions
-- Interactive portfolio cards with modal view
-- Mobile-friendly navigation
-- Contact form
-- Dark theme with accent colors
+- Responsive design for all devices
+- Interactive UI with animations
+- Contact form with PHP backend
+- Project showcase with modal details
+- Skills and experience sections
 
-## Sections
+## Setup Instructions
 
-1. **Hero** - Introduction
-2. **About Me** - Personal information and skills overview
-3. **Experience** - Work history and achievements
-4. **Projects** - Portfolio of completed projects
-5. **Skills** - Technical and professional capabilities
-6. **Education** - Academic background
-7. **Contact** - Form and social media links
+### Prerequisites
+
+- Web server with PHP support (Apache, Nginx, etc.)
+- PHP 7.0 or higher
+
+### Installation
+
+1. Clone this repository to your web server's public directory:
+   ```
+   git clone https://github.com/moh-a-abde/moh-a-abde.github.io.git
+   ```
+
+2. Ensure PHP is properly configured on your server.
+
+3. Make sure the `process_form.php` file has the correct permissions:
+   ```
+   chmod 755 process_form.php
+   ```
+
+4. Update the email address in `process_form.php` if needed:
+   ```php
+   $to = 'abde8473@stthomas.edu'; // Replace with your email
+   ```
+
+5. Create a `form_submissions.log` file and make it writable:
+   ```
+   touch form_submissions.log
+   chmod 666 form_submissions.log
+   ```
+
+### Contact Form Configuration
+
+The contact form uses PHP's `mail()` function to send emails. For this to work properly:
+
+1. Ensure your server has a mail service configured (Postfix, Sendmail, etc.)
+2. Check your PHP configuration to make sure the mail function is enabled
+3. Test the form by submitting a message and checking if you receive the email
+
+If emails are not being sent, check your server's mail logs for errors.
+
+## Customization
+
+- Update personal information in `index.html`
+- Modify styles in `css/styles.css`
+- Add or remove sections as needed
+
+## License
+
+All rights reserved. © 2024 Mohamed A. Abdel Hamid.
