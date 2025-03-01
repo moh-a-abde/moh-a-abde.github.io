@@ -322,11 +322,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
+            .then(response => {
+                // Check if the response is ok (status in the range 200-299)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.status);
+                }
+                return response.json();
+            })
             .then(data => {
+                console.log('Form submission response:', data);
+                
                 // Create success message container
                 const successMessage = document.createElement('div');
                 successMessage.className = 'success-message';
+                
+                // Add a note about email status if it was only saved
+                let additionalInfo = '';
+                if (data.mail_status === 'saved_only') {
+                    additionalInfo = '<br><small style="font-size: 0.8em; opacity: 0.8;">Your message has been saved. I\'ll check it soon!</small>';
+                }
+                
                 successMessage.innerHTML = `
                     <div class="fancy-button-wrap">
                         <div class="button-shadow"></div>
@@ -334,6 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span>
                                 Thanks for your message, ${name}!<br>
                                 I'll get back to you soon.
+                                ${additionalInfo}
                             </span>
                         </div>
                     </div>
@@ -356,13 +372,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             })
             .catch(error => {
+                console.error('Error:', error);
+                
                 // Reset button state
                 submitButton.innerHTML = originalButtonText;
                 submitButton.disabled = false;
                 
-                // Show error message
-                alert('Sorry, there was an error sending your message. Please try again later.');
-                console.error('Error:', error);
+                // Create a more user-friendly error message
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'error-message';
+                errorMessage.style.color = 'var(--accent)';
+                errorMessage.style.padding = '15px';
+                errorMessage.style.margin = '15px 0';
+                errorMessage.style.border = '1px solid var(--accent)';
+                errorMessage.style.borderRadius = '5px';
+                errorMessage.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';
+                errorMessage.style.textAlign = 'center';
+                
+                errorMessage.innerHTML = `
+                    <p>Sorry, there was an error sending your message.</p>
+                    <p>Please try again later or contact me directly at abde8473@stthomas.edu</p>
+                    <button class="try-again" style="background: var(--accent); color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-top: 10px;">Try Again</button>
+                `;
+                
+                // Insert error message before the form
+                contactForm.parentNode.insertBefore(errorMessage, contactForm);
+                
+                // Add event listener to the "Try Again" button
+                const tryAgainButton = errorMessage.querySelector('.try-again');
+                if (tryAgainButton) {
+                    tryAgainButton.addEventListener('click', function() {
+                        errorMessage.remove();
+                    });
+                }
             });
         });
     }

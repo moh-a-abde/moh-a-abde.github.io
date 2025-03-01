@@ -1489,4 +1489,37 @@ html {
         inset 0 -0.125em 0.125em rgba(163, 107, 255, 0.5),
         0 0.1em 0.05em -0.1em rgba(0, 0, 0, 0.4),
         0 0 0.05em 0.1em inset rgba(163, 107, 255, 0.4);
+}
+
+/* Form error and success messages */
+.error-message {
+    color: var(--accent);
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    background-color: rgba(255, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.error-message button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.2s ease;
+}
+
+.error-message button:hover {
+    background: var(--accent-dark, #a00);
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 } 
