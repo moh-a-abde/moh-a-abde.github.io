@@ -381,18 +381,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Create a more user-friendly error message
                 const errorMessage = document.createElement('div');
                 errorMessage.className = 'error-message';
-                errorMessage.style.color = 'var(--accent)';
-                errorMessage.style.padding = '15px';
-                errorMessage.style.margin = '15px 0';
-                errorMessage.style.border = '1px solid var(--accent)';
-                errorMessage.style.borderRadius = '5px';
-                errorMessage.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';
-                errorMessage.style.textAlign = 'center';
                 
                 errorMessage.innerHTML = `
                     <p>Sorry, there was an error sending your message.</p>
-                    <p>Please try again later or contact me directly at abde8473@stthomas.edu</p>
-                    <button class="try-again" style="background: var(--accent); color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-top: 10px;">Try Again</button>
+                    <p>Please try again later or contact me directly at <a href="mailto:abde8473@stthomas.edu" style="color: var(--accent); text-decoration: none;">abde8473@stthomas.edu</a></p>
+                    <div class="fancy-button-wrap">
+                        <div class="button-shadow"></div>
+                        <button class="fancy-button try-again">
+                            <span>Try Again</span>
+                        </button>
+                    </div>
                 `;
                 
                 // Insert error message before the form

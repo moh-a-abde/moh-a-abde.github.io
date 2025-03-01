@@ -44,6 +44,7 @@
     --text-secondary: #b0b0b0;
     --text-tertiary: rgba(176, 176, 176, 0.6);
     --accent: #a36bff;
+    --accent-rgb: 163, 107, 255;
     
     /* Elevation */
     --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -1493,33 +1494,41 @@ html {
 
 /* Form error and success messages */
 .error-message {
-    color: var(--accent);
-    padding: 15px;
-    margin: 15px 0;
+    color: var(--text-primary);
+    padding: 2rem;
+    margin: 1.5rem 0;
     border: 1px solid var(--accent);
-    border-radius: 5px;
-    background-color: rgba(255, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: rgba(var(--accent-rgb), 0.05);
     text-align: center;
     animation: fadeIn 0.3s ease-in-out;
 }
 
-.error-message button {
-    background: var(--accent);
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: all 0.2s ease;
+.error-message p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
 }
 
-.error-message button:hover {
-    background: var(--accent-dark, #a00);
-    transform: translateY(-2px);
+.error-message a {
+    transition: opacity 0.2s ease;
+}
+
+.error-message a:hover {
+    opacity: 0.8;
+}
+
+.error-message .fancy-button-wrap {
+    margin: 1.5rem auto 0;
+    max-width: 180px;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 } 
