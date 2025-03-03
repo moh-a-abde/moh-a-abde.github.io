@@ -463,24 +463,121 @@ section {
 }
 
 .card-avatar {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     background: linear-gradient(135deg, rgba(163, 107, 255, 0.2), rgba(41, 41, 41, 0.2));
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: var(--spacing-sm);
+    margin: 0 auto var(--spacing-md);
     position: relative;
     overflow: hidden;
     border: 2px solid rgba(163, 107, 255, 0.3);
+    perspective: 1000px;
+    cursor: pointer;
+    transform-style: preserve-3d;
 }
 
-.card-avatar img {
+.avatar-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.primary-avatar,
+.secondary-avatar {
+    position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform var(--transition-medium);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 50%;
+    transition: all 0.5s ease;
+    transform-style: preserve-3d;
+}
+
+.primary-avatar {
+    transform: rotateY(0deg);
+}
+
+.secondary-avatar {
+    transform: rotateY(180deg);
+}
+
+/* Fix for Safari and other browsers */
+.avatar-container.flipped .primary-avatar {
+    transform: rotateY(180deg);
+}
+
+.avatar-container.flipped .secondary-avatar {
+    transform: rotateY(360deg);
+}
+
+/* Shine effect */
+.avatar-container::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(30deg);
+    transition: all 0.6s;
+    z-index: 1;
+    opacity: 0;
+}
+
+.portfolio-card:hover .avatar-container::after {
+    animation: shine 1.5s ease-in-out;
+    opacity: 1;
+}
+
+@keyframes shine {
+    0% {
+        left: -60%;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        left: 120%;
+        opacity: 0;
+    }
+}
+
+.card-avatar::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--accent), var(--accent-dark), var(--accent-light));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.portfolio-card:hover .card-avatar::before {
+    opacity: 1;
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .portfolio-card:hover .card-avatar img {
@@ -1195,6 +1292,47 @@ footer {
         width: 1.25rem;
         height: 1.25rem;
     }
+
+    .avatar-hint {
+        font-size: 9px;
+        padding: 2px 6px;
+        opacity: 0.8;
+        bottom: -5px;
+    }
+    
+    .card-avatar {
+        width: 100px;
+        height: 100px;
+    }
+    
+    /* Add touch support for mobile */
+    .avatar-container {
+        transition: transform 0.6s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    }
+    
+    /* Make the animation trigger on touch for mobile */
+    @media (hover: none) {
+        .card-avatar:active .avatar-container {
+            transform: rotateY(180deg);
+        }
+        
+        .card-avatar:active .avatar-hint {
+            opacity: 0;
+        }
+        
+        .card-avatar:active::before {
+            opacity: 1;
+            animation: rotate 2s linear infinite;
+        }
+        
+        .card-avatar:active .avatar-container .primary-avatar {
+            transform: rotateY(180deg);
+        }
+        
+        .card-avatar:active .avatar-container .secondary-avatar {
+            transform: rotateY(360deg);
+        }
+    }
 }
 
 /* Animations */
@@ -1314,6 +1452,7 @@ html {
     background-color: rgba(30, 30, 30, 0.7);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     text-decoration: none;
+    color: inherit;
     position: relative;
     opacity: 0;
     transform: translateY(20px);
@@ -1376,7 +1515,7 @@ html {
 
 .tech-name {
     font-size: 0.85rem;
-    color: var(--light-text);
+    color: #ffffff;
     font-weight: 500;
     transition: color 0.3s ease, transform 0.3s ease;
     margin-top: 0.5rem;
@@ -1904,4 +2043,42 @@ html {
 .contact-info a:hover {
     color: #b88aff !important;
     text-decoration: underline !important;
+}
+
+.avatar-hint {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent);
+    color: var(--bg-light);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.card-avatar:hover .avatar-hint {
+    opacity: 1;
+    bottom: -5px;
+}
+
+.avatar-container.flipped,
+.avatar-container.hover-flip {
+    transform: rotateY(180deg);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.avatar-container.flipped .primary-avatar,
+.avatar-container.hover-flip .primary-avatar {
+    transform: rotateY(180deg);
+}
+
+.avatar-container.flipped .secondary-avatar,
+.avatar-container.hover-flip .secondary-avatar {
+    transform: rotateY(360deg);
 } 

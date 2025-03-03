@@ -460,19 +460,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Initialize all functions
-    initMobileMenu();
-    initHeroAnimation();
-    initScrollProgress();
-    initScrollAnimations();
-    updateActiveNavLink();
-    createParticles();
-    observeTechStackSection();
+    function initAvatarFlip() {
+        const cardAvatar = document.querySelector('.card-avatar');
+        if (cardAvatar) {
+            // Handle click for flip
+            cardAvatar.addEventListener('click', function() {
+                const avatarContainer = this.querySelector('.avatar-container');
+                avatarContainer.classList.toggle('flipped');
+                
+                // Update hint text based on flip state
+                const hint = this.querySelector('.avatar-hint');
+                if (hint) {
+                    hint.textContent = avatarContainer.classList.contains('flipped') ? 
+                        'Click to flip back' : 'Click to flip';
+                }
+            });
+            
+            // Handle mouseenter/mouseleave for desktop
+            if (window.matchMedia('(min-width: 768px)').matches && window.matchMedia('(hover: hover)').matches) {
+                cardAvatar.addEventListener('mouseenter', function() {
+                    const avatarContainer = this.querySelector('.avatar-container');
+                    if (!avatarContainer.classList.contains('flipped')) {
+                        avatarContainer.classList.add('hover-flip');
+                    }
+                });
+                
+                cardAvatar.addEventListener('mouseleave', function() {
+                    const avatarContainer = this.querySelector('.avatar-container');
+                    avatarContainer.classList.remove('hover-flip');
+                });
+            }
+        }
+    }
 
-    // Update all functions on scroll
-    window.addEventListener('scroll', function() {
-        updateHeaderState();
-        updateScrollProgress();
-        updateActiveNavLink();
-    });
+    // Initialize all functions
+    function init() {
+        initMobileMenu();
+        initHeroAnimation();
+        initScrollProgress();
+        initScrollAnimations();
+        createParticles();
+        observeTechStackSection();
+        initAvatarFlip();
+        
+        // Event listeners
+        window.addEventListener('scroll', function() {
+            updateScrollProgress();
+            updateHeaderState();
+            updateActiveNavLink();
+        });
+    }
+
+    // Initialize all functions
+    init();
 }); 
