@@ -230,6 +230,76 @@ document.addEventListener('DOMContentLoaded', () => {
             
             educationSection.appendChild(particle);
         }
+        
+        // Skills section particles
+        const skillsSection = document.getElementById('skills');
+        for (let i = 0; i < 10; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('skills-particle');
+            
+            // Add a specific shape class
+            const shapeType = particleTypes[Math.floor(Math.random() * particleTypes.length)];
+            particle.classList.add(`particle-${shapeType}`);
+            
+            // Random size between 5px and 15px
+            const size = 5 + Math.floor(Math.random() * 10);
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Random position
+            particle.style.left = `${Math.random() * 95}%`;
+            
+            // Random animation duration and delay
+            const animDuration = 10 + Math.random() * 20;
+            particle.style.animation = `skillsParticle ${animDuration}s ease-in-out infinite`;
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+            
+            // Add pulse effect with different timing
+            if (Math.random() > 0.5) {
+                particle.style.animation += `, particlePulse ${2 + Math.random() * 3}s ease-in-out infinite`;
+                particle.style.animationDelay += `, ${Math.random() * 2}s`;
+            }
+            
+            // Random opacity
+            particle.style.opacity = 0.1 + (Math.random() * 0.5);
+            
+            skillsSection.appendChild(particle);
+        }
+        
+        // Contact section particles
+        const contactSection = document.getElementById('contact');
+        for (let i = 0; i < 8; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('contact-particle');
+            
+            // Add a specific shape class
+            const shapeType = particleTypes[Math.floor(Math.random() * particleTypes.length)];
+            particle.classList.add(`particle-${shapeType}`);
+            
+            // Random size between 5px and 15px
+            const size = 5 + Math.floor(Math.random() * 10);
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Random position
+            particle.style.left = `${Math.random() * 95}%`;
+            
+            // Random animation duration and delay
+            const animDuration = 10 + Math.random() * 20;
+            particle.style.animation = `contactParticle ${animDuration}s ease-in-out infinite`;
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+            
+            // Add pulse effect with different timing
+            if (Math.random() > 0.5) {
+                particle.style.animation += `, particlePulse ${2 + Math.random() * 3}s ease-in-out infinite`;
+                particle.style.animationDelay += `, ${Math.random() * 2}s`;
+            }
+            
+            // Random opacity
+            particle.style.opacity = 0.1 + (Math.random() * 0.5);
+            
+            contactSection.appendChild(particle);
+        }
     }
 
     // Create particles when the page loads
