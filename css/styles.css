@@ -26,6 +26,7 @@
     --spacing-md: 1.5rem;
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
+    --spacing-xxl: 4rem;
     
     /* Sizing */
     --card-width: 400;
@@ -1333,248 +1334,145 @@ html {
 
 /* Tech Stack Section */
 .tech-stack-section {
-    background-color: var(--dark-bg);
-    padding: 5rem 0 3rem;
-    text-align: center;
-    max-width: 100%;
-    overflow: hidden;
+    padding: var(--spacing-xxl) var(--spacing-lg);
     position: relative;
+    overflow: hidden;
 }
 
 .tech-stack-title {
-    font-size: 2rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--text-primary);
     text-align: center;
-    margin: 0 auto 3rem;
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 2.5rem;
     position: relative;
     display: inline-block;
-    padding: 0.5rem 1.5rem;
-    letter-spacing: 1px;
-    animation: techTitleGlow 3s ease-in-out infinite;
-    background: linear-gradient(135deg, rgba(163, 107, 255, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
-    border-radius: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 2rem;
+    color: var(--accent);
+    overflow: hidden;
+    animation: techTitlePulse 3s ease-in-out infinite;
 }
 
-/* Add top and bottom decorative borders */
+.tech-stack-title span {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    animation: techTitleFloat 5s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.3),
+                 0 0 20px rgba(var(--accent-rgb), 0.2);
+}
+
 .tech-stack-title::before,
 .tech-stack-title::after {
-    content: "";
+    content: '';
     position: absolute;
-    background: var(--accent);
-    opacity: 0;
-    transform-origin: center;
-    transition: all 0.3s ease;
-}
-
-/* Top and bottom lines */
-.tech-stack-title span::before,
-.tech-stack-title span::after {
-    content: "<";
-    position: absolute;
-    font-weight: 300;
-    opacity: 0.6;
-    animation: bracketPulse 3s ease-in-out infinite;
-}
-
-.tech-stack-title span::before {
-    left: -1.5rem;
-}
-
-.tech-stack-title span::after {
-    content: "/>";
-    right: -2.5rem;
-}
-
-/* Add additional top and bottom lines */
-.tech-stack-title::after {
-    content: "";
-    position: absolute;
-    width: 0%;
-    height: 1px;
-    bottom: -10px;
-    left: 50%;
-    background: linear-gradient(to right, transparent, var(--accent), transparent);
-    animation: lineExpandOut 3s ease-in-out infinite;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--accent), 
+        transparent);
+    width: 0;
+    transition: width 0.8s ease;
+    left: 0;
+    animation: techLineExpand 5s ease-in-out infinite;
 }
 
 .tech-stack-title::before {
-    content: "";
+    top: 0;
+    animation-delay: 0.5s;
+}
+
+.tech-stack-title::after {
+    bottom: 0;
+    animation-delay: 1s;
+}
+
+.tech-stack-title span::before,
+.tech-stack-title span::after {
+    content: '';
     position: absolute;
-    width: 0%;
-    height: 1px;
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--accent);
+    opacity: 0.7;
+    z-index: -1;
+    transition: all 0.5s ease;
+}
+
+.tech-stack-title span::before {
     top: -10px;
-    left: 50%;
-    background: linear-gradient(to right, transparent, var(--accent), transparent);
-    animation: lineExpandOut 3s ease-in-out infinite 0.5s;
+    left: -20px;
+    border-right: none;
+    border-bottom: none;
+    animation: techCornerPulse 3s ease-in-out infinite;
 }
 
-/* Technology animations */
-@keyframes lineExpandOut {
+.tech-stack-title span::after {
+    bottom: -10px;
+    right: -20px;
+    border-left: none;
+    border-top: none;
+    animation: techCornerPulse 3s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+@keyframes techTitlePulse {
     0%, 100% {
-        width: 0%;
-        opacity: 0.5;
-    }
-    50% {
-        width: 100%;
         opacity: 1;
-    }
-}
-
-@keyframes techTitleGlow {
-    0%, 100% {
-        text-shadow: 0 0 5px rgba(163, 107, 255, 0.1);
-        letter-spacing: 1px;
-    }
-    50% {
-        text-shadow: 0 0 15px rgba(163, 107, 255, 0.5);
-        letter-spacing: 1.5px;
-    }
-}
-
-@keyframes bracketPulse {
-    0%, 100% {
-        opacity: 0.3;
-        transform: translateY(0);
     }
     50% {
         opacity: 0.8;
-        transform: translateY(-3px);
+    }
+}
+
+@keyframes techTitleFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes techLineExpand {
+    0%, 100% {
+        width: 0;
+        left: 50%;
+    }
+    50% {
+        width: 100%;
+        left: 0;
+    }
+}
+
+@keyframes techCornerPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.9;
     }
 }
 
 .tech-stack-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 15px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    padding: 30px;
-    position: relative;
-}
-
-.fancy-button-wrap:has(.fancy-button:active) .button-shadow {
-    filter: blur(clamp(2px, 0.125em, 12px));
-    -webkit-filter: blur(clamp(2px, 0.125em, 12px));
-    -moz-filter: blur(clamp(2px, 0.125em, 12px));
-    -ms-filter: blur(clamp(2px, 0.125em, 12px));
-}
-
-.fancy-button-wrap:has(.fancy-button:active) .button-shadow::after {
-    top: calc(var(--shadow-cuttoff-fix) - 0.5em);
-    opacity: 0.75;
-    background: linear-gradient(180deg, rgba(163, 107, 255, 0.4), rgba(83, 54, 130, 0.5));
-}
-
-.fancy-button-wrap:has(.fancy-button:active) span {
-    text-shadow: 0.025em 0.25em 0.05em rgba(0, 0, 0, 0.12);
-}
-
-/* SVG inside fancy button */
-.fancy-button svg {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 5px;
-    width: 15px;
-    height: 15px;
-    transition: transform var(--transition-medium);
-    stroke: var(--text-primary);
-}
-
-.fancy-button:hover svg {
-    transform: translateY(-2px);
-}
-
-/* Make the resume button wider */
-.hero-buttons .fancy-button-wrap:last-child .fancy-button span {
-    padding-inline: 2.5em;
-}
-
-/* Contact card specific styles */
-.contact-card {
-    cursor: default;
-}
-
-.contact-card .fancy-button {
-    cursor: pointer;
-}
-
-/* Success message styling */
-.success-message {
-    width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: var(--spacing-lg);
-}
-
-.success-message .fancy-button-wrap {
-    min-width: 250px;
-}
-
-.fancy-button.clicked {
-    transform: scale(0.95);
-    box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.2),
-        inset 0 -0.125em 0.125em rgba(163, 107, 255, 0.5),
-        0 0.1em 0.05em -0.1em rgba(0, 0, 0, 0.4),
-        0 0 0.05em 0.1em inset rgba(163, 107, 255, 0.4);
-}
-
-/* Form error and success messages */
-.error-message {
-    color: var(--text-primary);
-    padding: 2rem;
-    margin: 1.5rem 0;
-    border: 1px solid var(--accent);
-    border-radius: 10px;
-    background-color: rgba(var(--accent-rgb), 0.05);
-    text-align: center;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-.error-message p {
-    margin-bottom: 1rem;
-    line-height: 1.5;
-}
-
-.error-message a {
-    transition: opacity 0.2s ease;
-}
-
-.error-message a:hover {
-    color: #b88aff !important;
-    text-decoration: underline !important;
-}
-
-.error-message .fancy-button-wrap {
-    margin-top: 1.5rem;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-.contact-info {
-    text-align: left;
-}
-
-.contact-info p {
-    margin-bottom: 0.5rem;
-}
-
-.contact-info a {
-    color: var(--accent);
-    text-decoration: none;
-}
-
-.contact-info a:hover {
-    text-decoration: underline;
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+    position: relative;
+    z-index: 1;
 }
 
 .tech-stack-grid {
-.contact-info a:hover { text-decoration: underline; }
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.contact-info a:hover { 
+    text-decoration: underline; 
+}
