@@ -197,14 +197,37 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Education section particles
         const educationSection = document.getElementById('education');
-        const symbols = ['🎓', '📚', '💻', '🔬', '🔍'];
-        for (let i = 0; i < 5; i++) {
+        const particleTypes = ['square', 'circle', 'triangle', 'diamond', 'dot'];
+        for (let i = 0; i < 12; i++) {
             const particle = document.createElement('div');
             particle.classList.add('education-particle');
-            particle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-            particle.style.left = `${Math.random() * 90}%`;
-            particle.style.animation = `educationParticle ${10 + Math.random() * 15}s linear infinite`;
+            
+            // Add a specific shape class
+            const shapeType = particleTypes[Math.floor(Math.random() * particleTypes.length)];
+            particle.classList.add(`particle-${shapeType}`);
+            
+            // Random size between 5px and 15px
+            const size = 5 + Math.floor(Math.random() * 10);
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Random position
+            particle.style.left = `${Math.random() * 95}%`;
+            
+            // Random animation duration and delay
+            const animDuration = 10 + Math.random() * 20;
+            particle.style.animation = `educationParticle ${animDuration}s ease-in-out infinite`;
             particle.style.animationDelay = `${Math.random() * 5}s`;
+            
+            // Add pulse effect with different timing
+            if (Math.random() > 0.5) {
+                particle.style.animation += `, particlePulse ${2 + Math.random() * 3}s ease-in-out infinite`;
+                particle.style.animationDelay += `, ${Math.random() * 2}s`;
+            }
+            
+            // Random opacity
+            particle.style.opacity = 0.1 + (Math.random() * 0.5);
+            
             educationSection.appendChild(particle);
         }
     }
