@@ -11,6 +11,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1500);
     }
 
+    // Initialize hero section animation
+    function initHeroAnimation() {
+        const heroElements = [
+            document.querySelector('.greeting'),
+            document.querySelector('.hero-name'),
+            document.querySelector('.hero-title'),
+            document.querySelector('.hero-description'),
+            document.querySelector('.hero-buttons')
+        ];
+        
+        heroElements.forEach((element, index) => {
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, 300 + (index * 150));
+            }
+        });
+    }
+    
+    // Run hero animation after a small delay
+    setTimeout(initHeroAnimation, 300);
+
     // Handle mobile menu
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navMenu = document.querySelector('nav ul');
@@ -406,4 +433,46 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // Initialize tech stack section animations
+    function observeTechStackSection() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    const techItems = entry.target.querySelectorAll('.tech-item');
+                    techItems.forEach((item, index) => {
+                        // Reset animation for items
+                        item.style.animationName = 'none';
+                        item.offsetHeight; // Trigger reflow
+                        item.style.animationName = '';
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+
+        const techSection = document.querySelector('.tech-stack-section');
+        if (techSection) {
+            observer.observe(techSection);
+        }
+    }
+
+    // Initialize all functions
+    initMobileMenu();
+    initHeroAnimation();
+    initScrollProgress();
+    initScrollAnimations();
+    updateActiveNavLink();
+    createParticles();
+    observeTechStackSection();
+
+    // Update all functions on scroll
+    window.addEventListener('scroll', function() {
+        updateHeaderState();
+        updateScrollProgress();
+        updateActiveNavLink();
+    });
 }); 
