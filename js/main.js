@@ -11,14 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1500);
     }
 
-    // Initialize scroll-to-type effect
-    initScrollToType();
-
     // Initialize hero section animation
     function initHeroAnimation() {
         const heroElements = [
             document.querySelector('.greeting'),
-            // Include hero-name to ensure it's visible by default
             document.querySelector('.hero-name'),
             document.querySelector('.hero-title'),
             document.querySelector('.hero-description'),
@@ -165,11 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create particles for visual effect
     function createParticles() {
         const sections = [
-            { id: 'about', className: 'about-particle', count: 15 },
-            { id: 'experience', className: 'experience-particle', count: 15 },
-            { id: 'projects', className: 'project-particle', count: 15 },
-            { id: 'skills', className: 'skills-particle', count: 15 },
             { id: 'education', className: 'education-particle', count: 15 },
+            { id: 'skills', className: 'skills-particle', count: 15 },
+            { id: 'about', className: 'about-particle', count: 15 },
             { id: 'contact', className: 'contact-particle', count: 15 }
         ];
 
@@ -186,42 +180,18 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let i = 0; i < section.count; i++) {
                 const particle = document.createElement('div');
                 
-                // Use different shapes based on section
-                let shape;
-                if (section.id === 'experience') {
-                    // Experience uses horizontal lines
-                    particle.style.width = `${Math.floor(Math.random() * 30) + 20}px`;
-                    particle.style.height = '2px';
-                } else if (section.id === 'projects') {
-                    // Projects uses vertical lines
-                    particle.style.width = '2px';
-                    particle.style.height = `${Math.floor(Math.random() * 10) + 10}px`;
-                    shape = '';
-                } else {
-                    // Other sections use circles and dots
-                    const shapes = ['particle-circle', 'particle-dot'];
-                    shape = shapes[Math.floor(Math.random() * shapes.length)];
-                    
-                    // Random size between 3px and 12px
-                    const size = Math.floor(Math.random() * 10) + 3;
-                    particle.style.width = `${size}px`;
-                    particle.style.height = `${size}px`;
-                }
+                // Only use circle particles
+                const shapes = ['particle-circle', 'particle-dot'];
+                const shape = shapes[Math.floor(Math.random() * shapes.length)];
                 
-                if (shape) {
-                    particle.classList.add(shape);
-                }
+                particle.classList.add('particle', section.className, shape);
                 
-                particle.classList.add('particle', section.className);
+                // Random size between 3px and 12px
+                const size = Math.floor(Math.random() * 10) + 3;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
                 
-                // Add grey class to a small fraction (20%) of particles in all sections
-                if ((section.id === 'about' || section.id === 'contact' || 
-                     section.id === 'experience' || section.id === 'projects' ||
-                     section.id === 'skills' || section.id === 'education') && Math.random() < 0.2) {
-                    particle.classList.add('grey');
-                }
-                
-                // Position randomly within the section
+                // Position randomly within the section, allowing particles to go further down
                 // Use up to 120% of section height to allow particles to go beyond the visible section
                 const top = Math.random() * (sectionHeight * 1.2) - 20;
                 const left = Math.random() * sectionWidth;
@@ -229,27 +199,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 particle.style.top = `${top}px`;
                 particle.style.left = `${left}px`;
                 
-                // Random opacity - lower for circles (handled by CSS), higher for other shapes
-                if (shape !== 'particle-circle') {
-                    particle.style.opacity = (Math.random() * 0.6 + 0.2).toString();
-                }
+                // Random opacity
+                particle.style.opacity = (Math.random() * 0.6 + 0.2).toString();
                 
-                // Random animation delay - more variation
-                const delay = Math.random() * 8;
+                // Random animation delay
+                const delay = Math.random() * 5;
                 particle.style.animationDelay = `${delay}s`;
                 
-                // Random animation duration with more variation
-                let duration;
-                if (section.id === 'experience') {
-                    // Experience particles with varying speeds
-                    duration = Math.random() * 10 + 10; // 10-20s
-                } else if (section.id === 'projects') {
-                    // Project particles with varying speeds
-                    duration = Math.random() * 12 + 12; // 12-24s
-                } else {
-                    // Other sections
-                    duration = Math.random() * 15 + 10; // 10-25s
-                }
+                // Random animation duration between 10s and 25s for slower movement
+                const duration = Math.random() * 15 + 10;
                 particle.style.animationDuration = `${duration}s`;
                 
                 sectionEl.appendChild(particle);
@@ -259,15 +217,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Create particles when the page loads
     window.addEventListener('load', createParticles);
-    
-    // Recreate particles when window is resized
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-            createParticles();
-        }, 250);
-    });
 
     // Modal functionality for cards (excluding contact card)
     const portfolioCards = document.querySelectorAll('.portfolio-card:not(.contact-card)');
@@ -550,221 +499,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Initialize scroll-to-type effect
-    function initScrollToType() {
-        // Check if the browser supports CSS scroll-driven animations
-        const hasScrollSupport = CSS.supports(
-            '(animation-timeline: view()) and (animation-range: 0 100%)'
-        );
-
-        // If not supported, use GSAP as a fallback
-        if (!hasScrollSupport) {
-            // Load GSAP and ScrollTrigger dynamically
-            const loadGSAP = async () => {
-                try {
-                    // Load GSAP from CDN
-                    const gsapScript = document.createElement('script');
-                    gsapScript.src = 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js';
-                    document.head.appendChild(gsapScript);
-
-                    // Wait for GSAP to load
-                    await new Promise(resolve => {
-                        gsapScript.onload = resolve;
-                    });
-
-                    // Load ScrollTrigger
-                    const scrollTriggerScript = document.createElement('script');
-                    scrollTriggerScript.src = 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js';
-                    document.head.appendChild(scrollTriggerScript);
-
-                    // Wait for ScrollTrigger to load
-                    await new Promise(resolve => {
-                        scrollTriggerScript.onload = resolve;
-                    });
-
-                    // Initialize GSAP ScrollTrigger
-                    gsap.registerPlugin(ScrollTrigger);
-                    console.info('Registered GSAP ScrollTrigger for scroll-to-type fallback');
-
-                    // Get the hero section and the typing element
-                    const heroSection = document.querySelector('.hero');
-                    const typingElement = document.querySelector('.hero-name-typing');
-                    
-                    // Get the text length from CSS variable
-                    const textLength = getComputedStyle(document.documentElement).getPropertyValue('--text-length').trim();
-                    
-                    // Apply the GSAP animation
-                    gsap.fromTo(
-                        typingElement,
-                        {
-                            '--idx': textLength,
-                        },
-                        {
-                            '--idx': 0,
-                            // Make the animation slower by increasing duration
-                            duration: 2,
-                            // Use fewer steps for a slower animation
-                            ease: `steps(10, end)`,
-                            scrollTrigger: {
-                                trigger: heroSection,
-                                // Increase scrub value for smoother, slower animation
-                                scrub: 0.5,
-                                start: 'top top',
-                                // Extend the end point to make the animation last longer
-                                end: 'bottom+=50% bottom',
-                                // Remove velocity updates since we no longer have a cursor
-                                onUpdate: null,
-                                onScrubComplete: null,
-                            },
-                        }
-                    );
-                } catch (error) {
-                    console.error('Failed to load GSAP:', error);
-                }
-            };
-
-            loadGSAP();
-        }
-    }
-
     // Initialize all functions
     function init() {
-        // Initialize mobile menu
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('nav ul');
-        
-        if (mobileMenuBtn && navMenu) {
-            mobileMenuBtn.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '×' : '☰';
-            });
-        }
-        
-        // Initialize hero animation
+        initMobileMenu();
         initHeroAnimation();
+        initScrollProgress();
+        initScrollAnimations();
+        createParticles();
+        observeTechStackSection();
+        initAvatarFlip();
         
-        // Initialize scroll progress
-        window.addEventListener('scroll', () => {
+        // Event listeners
+        window.addEventListener('scroll', function() {
             updateScrollProgress();
             updateHeaderState();
             updateActiveNavLink();
         });
-        
-        // Initial calls
-        updateScrollProgress();
-        updateHeaderState();
-        updateActiveNavLink();
-        
-        // Create initial particles
-        createParticles();
-        
-        // Initialize section observers for animations
-        const sections = document.querySelectorAll('.section-container');
-        
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    
-                    // Recreate particles for the visible section
-                    if (entry.target.id) {
-                        // Remove existing particles in this section
-                        entry.target.querySelectorAll('.particle').forEach(p => p.remove());
-                        
-                        // Create new particles just for this section
-                        const sectionConfig = {
-                            id: entry.target.id,
-                            className: `${entry.target.id}-particle`,
-                            count: 15
-                        };
-                        
-                        const sectionHeight = entry.target.offsetHeight;
-                        const sectionWidth = entry.target.offsetWidth;
-                        
-                        for (let i = 0; i < sectionConfig.count; i++) {
-                            const particle = document.createElement('div');
-                            
-                            // Use different shapes based on section
-                            let shape;
-                            if (entry.target.id === 'experience') {
-                                // Experience uses horizontal lines
-                                particle.style.width = `${Math.floor(Math.random() * 30) + 20}px`;
-                                particle.style.height = '2px';
-                            } else if (entry.target.id === 'projects') {
-                                // Projects uses vertical lines
-                                particle.style.width = '2px';
-                                particle.style.height = `${Math.floor(Math.random() * 10) + 10}px`;
-                                shape = '';
-                            } else {
-                                // Other sections use circles and dots
-                                const shapes = ['particle-circle', 'particle-dot'];
-                                shape = shapes[Math.floor(Math.random() * shapes.length)];
-                                
-                                // Random size between 3px and 12px
-                                const size = Math.floor(Math.random() * 10) + 3;
-                                particle.style.width = `${size}px`;
-                                particle.style.height = `${size}px`;
-                            }
-                            
-                            if (shape) {
-                                particle.classList.add(shape);
-                            }
-                            
-                            particle.classList.add('particle', sectionConfig.className);
-                            
-                            // Add grey class to a small fraction (20%) of particles in all sections
-                            if ((entry.target.id === 'about' || entry.target.id === 'contact' || 
-                                 entry.target.id === 'experience' || entry.target.id === 'projects' ||
-                                 entry.target.id === 'skills' || entry.target.id === 'education') && Math.random() < 0.2) {
-                                particle.classList.add('grey');
-                            }
-                            
-                            // Position randomly within the section
-                            const top = Math.random() * (sectionHeight * 1.2) - 20;
-                            const left = Math.random() * sectionWidth;
-                            
-                            particle.style.top = `${top}px`;
-                            particle.style.left = `${left}px`;
-                            
-                            // Random opacity - lower for circles (handled by CSS), higher for other shapes
-                            if (shape !== 'particle-circle') {
-                                particle.style.opacity = (Math.random() * 0.6 + 0.2).toString();
-                            }
-                            
-                            // Random animation delay - more variation
-                            const delay = Math.random() * 8;
-                            particle.style.animationDelay = `${delay}s`;
-                            
-                            // Random animation duration with more variation
-                            let duration;
-                            if (entry.target.id === 'experience') {
-                                // Experience particles with varying speeds
-                                duration = Math.random() * 10 + 10; // 10-20s
-                            } else if (entry.target.id === 'projects') {
-                                // Project particles with varying speeds
-                                duration = Math.random() * 12 + 12; // 12-24s
-                            } else {
-                                // Other sections
-                                duration = Math.random() * 15 + 10; // 10-25s
-                            }
-                            particle.style.animationDuration = `${duration}s`;
-                            
-                            entry.target.appendChild(particle);
-                        }
-                    }
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        sections.forEach(section => {
-            sectionObserver.observe(section);
-        });
-        
-        // Initialize tech stack section observer
-        observeTechStackSection();
-        
-        // Initialize avatar flip functionality
-        initAvatarFlip();
     }
 
     // Initialize all functions
