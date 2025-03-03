@@ -1109,11 +1109,16 @@ footer {
     }
 }
 
-/* Education section animations */
-.education-particle {
+/* 
+ * Particle shapes - used by education, skills, and contact sections
+ * These define the geometric shapes for the particles
+ * Each section uses the same shapes but with different animations and subtle color variations
+ */
+
+/* Common particle class */
+.particle {
     position: absolute;
     z-index: 1;
-    top: -20px;
     background-color: var(--accent);
     box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.3);
     filter: blur(0.5px);
@@ -1121,31 +1126,8 @@ footer {
     pointer-events: none; /* Ensure particles don't interfere with clicks */
 }
 
-/* 
- * Particle shapes - used by education, skills, and contact sections
- * These define the geometric shapes for the particles
- * Each section uses the same shapes but with different animations and subtle color variations
- */
-.particle-square {
-    border-radius: 2px;
-}
-
 .particle-circle {
     border-radius: 50%;
-}
-
-.particle-triangle {
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    background-color: transparent;
-    border-bottom: 1px solid var(--accent);
-    border-left: 1px solid transparent;
-    border-right: 1px solid transparent;
-    box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.2);
-}
-
-.particle-diamond {
-    transform: rotate(45deg);
-    border-radius: 2px;
 }
 
 .particle-dot {
@@ -1154,137 +1136,96 @@ footer {
     box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.5);
 }
 
+/* Education section particles */
+.education-particle {
+    animation: educationParticle 15s ease-in-out infinite;
+}
+
+/* Skills section particles */
+.skills-particle {
+    filter: blur(0.5px) hue-rotate(-15deg);
+    animation: skillsParticle 15s ease-in-out infinite;
+}
+
+/* About section particles */
+.about-particle {
+    animation: aboutParticle 15s ease-in-out infinite;
+}
+
+/* Contact section particles */
+.contact-particle {
+    filter: blur(0.5px) hue-rotate(15deg);
+    animation: contactParticle 15s ease-in-out infinite;
+}
+
+/* Animation for education particles */
 @keyframes educationParticle {
     0% {
-        transform: translateY(0) rotate(0deg);
+        transform: translateY(0) translateX(0);
         opacity: 0;
     }
     10% {
-        opacity: 0.2;
-    }
-    50% {
-        opacity: 0.15;
+        opacity: 1;
     }
     90% {
-        opacity: 0.1;
+        opacity: 0.5;
     }
     100% {
-        transform: translateY(400px) rotate(360deg);
+        transform: translateY(150%) translateX(20px);
         opacity: 0;
     }
 }
 
-@keyframes particlePulse {
+/* Animation for skills particles */
+@keyframes skillsParticle {
     0% {
-        transform: scale(1);
-        box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.3);
+        transform: translateY(0) translateX(0);
+        opacity: 0;
     }
-    50% {
-        transform: scale(1.2);
-        box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.5);
+    10% {
+        opacity: 1;
     }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.3);
-    }
-}
-
-/* About section animations */
-.about-particle {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    background: radial-gradient(circle, rgba(163, 107, 255, 0.2), rgba(163, 107, 255, 0));
-    border-radius: 50%;
-    z-index: 1;
-    animation: aboutParticle 5s ease-in-out infinite alternate;
-}
-
-@keyframes aboutParticle {
-    0% {
-        transform: scale(1);
+    90% {
         opacity: 0.3;
     }
     100% {
-        transform: scale(1.2);
-        opacity: 0.1;
+        transform: translateY(150%) translateX(-20px);
+        opacity: 0;
     }
 }
 
-/* Skills section animations */
-.skills-particle {
-    position: absolute;
-    z-index: 1;
-    top: -20px;
-    background-color: var(--accent);
-    box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.3);
-    filter: blur(0.5px) hue-rotate(-15deg);
-    transition: all 0.3s ease;
-    pointer-events: none; /* Ensure particles don't interfere with clicks */
-}
-
-@keyframes skillsParticle {
+/* Animation for about particles */
+@keyframes aboutParticle {
     0% {
-        transform: translateY(0) translateX(0) rotate(0deg);
+        transform: translateY(0) translateX(0);
         opacity: 0;
     }
     10% {
-        opacity: 0.2;
-    }
-    25% {
-        transform: translateY(100px) translateX(20px) rotate(90deg);
-    }
-    50% {
-        opacity: 0.15;
-        transform: translateY(200px) translateX(-20px) rotate(180deg);
-    }
-    75% {
-        transform: translateY(300px) translateX(20px) rotate(270deg);
+        opacity: 1;
     }
     90% {
-        opacity: 0.1;
+        opacity: 0.5;
     }
     100% {
-        transform: translateY(400px) translateX(0) rotate(360deg);
+        transform: translateY(150%) translateX(10px);
         opacity: 0;
     }
 }
 
-/* Contact section animations */
-.contact-particle {
-    position: absolute;
-    z-index: 1;
-    top: -20px;
-    background-color: var(--accent);
-    box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.3);
-    filter: blur(0.5px) hue-rotate(15deg);
-    transition: all 0.3s ease;
-    pointer-events: none; /* Ensure particles don't interfere with clicks */
-}
-
+/* Animation for contact particles */
 @keyframes contactParticle {
     0% {
-        transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+        transform: translateY(0) translateX(0);
         opacity: 0;
     }
     10% {
-        opacity: 0.2;
-    }
-    30% {
-        transform: translateY(120px) translateX(30px) rotate(120deg) scale(1.1);
-    }
-    50% {
-        opacity: 0.15;
-        transform: translateY(200px) translateX(-30px) rotate(240deg) scale(1);
-    }
-    70% {
-        transform: translateY(280px) translateX(30px) rotate(300deg) scale(0.9);
+        opacity: 1;
     }
     90% {
-        opacity: 0.1;
+        opacity: 0.5;
     }
     100% {
-        transform: translateY(400px) translateX(0) rotate(360deg) scale(1);
+        transform: translateY(150%) translateX(-10px);
         opacity: 0;
     }
 }
