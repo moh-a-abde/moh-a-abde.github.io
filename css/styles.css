@@ -253,7 +253,7 @@ section {
 }
 
 .greeting {
-    color: var(--accent);
+    color: var(--text-primary);
     font-size: var(--font-size-md);
     margin-bottom: var(--spacing-md);
     font-family: var(--font-family-mono);
@@ -263,9 +263,13 @@ section {
 .hero-name {
     font-size: clamp(40px, 7vw, 70px);
     font-weight: var(--font-weight-bold);
+    font-family: 'Minecraft', sans-serif;
     line-height: 1.1;
     margin-bottom: var(--spacing-md);
-    color: var(--text-primary);
+    background: linear-gradient(135deg, #a36bff 0%, #8b31ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     letter-spacing: -0.02em;
 }
 
@@ -1064,53 +1068,86 @@ footer {
     position: absolute;
     width: 40px;
     height: 2px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(163, 107, 255, 0.2); /* Purple color with reduced opacity */
     z-index: 1;
+    animation: experienceParticle 15s linear infinite;
+}
+
+.experience-particle.grey {
+    background-color: rgba(150, 150, 150, 0.15); /* Grey color with very low opacity */
+    animation-duration: 18s; /* Slightly different duration for variety */
 }
 
 @keyframes experienceParticle {
     0% {
         left: -40px;
         opacity: 0;
+        transform: translateY(0);
     }
     10% {
-        opacity: 0.5;
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(5px);
     }
     90% {
-        opacity: 0.5;
+        opacity: 0.3;
+        transform: translateY(-5px);
     }
     100% {
         left: 100%;
         opacity: 0;
+        transform: translateY(0);
     }
 }
 
-/* Project section animations */
+/* Project section animations - make vertical particles more dynamic */
 .project-particle {
     position: absolute;
     width: 2px;
     height: 10px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(163, 107, 255, 0.2); /* Purple color with reduced opacity */
     z-index: 1;
     top: -10px;
+    animation: projectParticle 15s ease-in-out infinite;
+    transform-origin: center;
+}
+
+.project-particle.grey {
+    background-color: rgba(150, 150, 150, 0.15); /* Grey color with very low opacity */
+    animation-duration: 20s; /* Different duration for variety */
 }
 
 @keyframes projectParticle {
     0% {
-        transform: translateY(0);
-        opacity: 0.5;
+        transform: translateY(0) translateX(0) scaleY(1);
+        opacity: 0;
     }
-    80% {
+    10% {
         opacity: 0.3;
+        transform: translateY(10px) translateX(5px) scaleY(1.2);
+    }
+    30% {
+        transform: translateY(100px) translateX(-8px) scaleY(0.8);
+    }
+    50% {
+        transform: translateY(175px) translateX(-5px) scaleY(1.5);
+    }
+    70% {
+        transform: translateY(250px) translateX(8px) scaleY(0.9);
+    }
+    90% {
+        opacity: 0.2;
+        transform: translateY(340px) translateX(5px) scaleY(1.2);
     }
     100% {
-        transform: translateY(350px);
+        transform: translateY(350px) translateX(0) scaleY(1);
         opacity: 0;
     }
 }
 
 /* 
- * Particle shapes - used by education, skills, and contact sections
+ * Particle shapes - used by education, skills, about, and contact sections
  * These define the geometric shapes for the particles
  * Each section uses the same shapes but with different animations and subtle color variations
  */
@@ -1128,6 +1165,7 @@ footer {
 
 .particle-circle {
     border-radius: 50%;
+    opacity: 0.3; /* Reduced opacity for circle particles */
 }
 
 .particle-dot {
@@ -1136,26 +1174,56 @@ footer {
     box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.5);
 }
 
-/* Education section particles */
+/* Education section particles - update to match about/contact */
 .education-particle {
+    filter: blur(0.5px);
     animation: educationParticle 15s ease-in-out infinite;
+    background-color: rgba(163, 107, 255, 0.2); /* Purple color with reduced opacity */
 }
 
-/* Skills section particles */
+/* Grey education particles */
+.education-particle.grey {
+    background-color: rgba(150, 150, 150, 0.15); /* Grey color with very low opacity */
+    box-shadow: 0 0 8px rgba(150, 150, 150, 0.2);
+}
+
+/* Skills section particles - update to match about/contact */
 .skills-particle {
-    filter: blur(0.5px) hue-rotate(-15deg);
+    filter: blur(0.5px);
     animation: skillsParticle 15s ease-in-out infinite;
+    background-color: rgba(163, 107, 255, 0.2); /* Purple color with reduced opacity */
+}
+
+/* Grey skills particles */
+.skills-particle.grey {
+    background-color: rgba(150, 150, 150, 0.15); /* Grey color with very low opacity */
+    box-shadow: 0 0 8px rgba(150, 150, 150, 0.2);
 }
 
 /* About section particles */
 .about-particle {
+    filter: blur(0.5px);
     animation: aboutParticle 15s ease-in-out infinite;
+    background-color: rgba(163, 107, 255, 0.2); /* Purple color with reduced opacity */
+}
+
+/* Grey about particles */
+.about-particle.grey {
+    background-color: rgba(150, 150, 150, 0.15); /* Grey color with very low opacity */
+    box-shadow: 0 0 8px rgba(150, 150, 150, 0.2);
 }
 
 /* Contact section particles */
 .contact-particle {
-    filter: blur(0.5px) hue-rotate(15deg);
+    filter: blur(0.5px);
     animation: contactParticle 15s ease-in-out infinite;
+    background-color: rgba(163, 107, 255, 0.2); /* Purple color with reduced opacity */
+}
+
+/* Grey contact particles */
+.contact-particle.grey {
+    background-color: rgba(150, 150, 150, 0.15); /* Grey color with very low opacity */
+    box-shadow: 0 0 8px rgba(150, 150, 150, 0.2);
 }
 
 /* Animation for education particles */
@@ -1165,13 +1233,13 @@ footer {
         opacity: 0;
     }
     10% {
-        opacity: 1;
-    }
-    90% {
         opacity: 0.5;
     }
+    90% {
+        opacity: 0.2;
+    }
     100% {
-        transform: translateY(150%) translateX(20px);
+        transform: translateY(120%) translateX(30px);
         opacity: 0;
     }
 }
@@ -1183,13 +1251,13 @@ footer {
         opacity: 0;
     }
     10% {
-        opacity: 1;
+        opacity: 0.5;
     }
     90% {
-        opacity: 0.3;
+        opacity: 0.2;
     }
     100% {
-        transform: translateY(150%) translateX(-20px);
+        transform: translateY(120%) translateX(-30px);
         opacity: 0;
     }
 }
@@ -1201,13 +1269,13 @@ footer {
         opacity: 0;
     }
     10% {
-        opacity: 1;
-    }
-    90% {
         opacity: 0.5;
     }
+    90% {
+        opacity: 0.2;
+    }
     100% {
-        transform: translateY(150%) translateX(10px);
+        transform: translateY(120%) translateX(30px);
         opacity: 0;
     }
 }
@@ -1219,13 +1287,13 @@ footer {
         opacity: 0;
     }
     10% {
-        opacity: 1;
-    }
-    90% {
         opacity: 0.5;
     }
+    90% {
+        opacity: 0.2;
+    }
     100% {
-        transform: translateY(150%) translateX(-10px);
+        transform: translateY(120%) translateX(-30px);
         opacity: 0;
     }
 }
@@ -1501,15 +1569,21 @@ html {
 }
 
 .tech-stack-title {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    color: var(--white);
-    margin-bottom: 2.5rem;
+    font-family: 'Minecraft', sans-serif;
+    background: linear-gradient(135deg, #a36bff 0%, #8b31ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 2rem;
     opacity: 0.9;
     position: relative;
     display: inline-block;
 }
 
+/* Removing the underline by commenting out the ::after pseudo-element */
+/* 
 .tech-stack-title::after {
     content: '';
     position: absolute;
@@ -1520,6 +1594,7 @@ html {
     left: 50%;
     transform: translateX(-50%);
 }
+*/
 
 .tech-stack-container {
     max-width: 1200px;
@@ -1540,16 +1615,16 @@ html {
 }
 
 .tech-item {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px 10px;
+    justify-content: center;
+    padding: 1.5rem;
     border-radius: 12px;
-    background-color: rgba(30, 30, 30, 0.7);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    text-decoration: none;
-    color: inherit;
-    position: relative;
+    background-color: rgba(255, 255, 255, 0.03);
+    transition: all 0.3s ease;
+    overflow: hidden;
     opacity: 0;
     transform: translateY(20px);
     animation: techItemFadeIn 0.6s forwards;
