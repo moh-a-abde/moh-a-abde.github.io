@@ -519,4 +519,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize all functions
     init();
+
+    // Gallery Notification Functionality
+    const galleryNotification = document.getElementById('galleryNotification');
+    const notificationClose = document.getElementById('notificationClose');
+    const currentTime = new Date().getTime();
+    const sevenDaysInMs = 7 * 24 * 60 * 60 * 1000;
+    
+    // Reset notification after 7 days
+    const lastClosedTime = localStorage.getItem('galleryNotificationClosedTime');
+    
+    if (lastClosedTime && (currentTime - parseInt(lastClosedTime)) > sevenDaysInMs) {
+        localStorage.removeItem('galleryNotificationClosed');
+        localStorage.removeItem('galleryNotificationClosedTime');
+    }
+    
+    // Check if notification was previously closed
+    const isNotificationClosed = localStorage.getItem('galleryNotificationClosed') === 'true';
+    
+    if (isNotificationClosed) {
+        galleryNotification.classList.add('collapsed');
+    }
+    
+    // Handle notification close button click
+    if (notificationClose) {
+        notificationClose.addEventListener('click', function() {
+            galleryNotification.classList.add('collapsed');
+            localStorage.setItem('galleryNotificationClosed', 'true');
+            localStorage.setItem('galleryNotificationClosedTime', currentTime.toString());
+        });
+    }
 }); 
