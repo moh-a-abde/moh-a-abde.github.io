@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Configuration
     const config = {
         font: 8,  // Base font size
-        ascii: '@#S%?*+;:,.',
+        ascii: '@#S%?*+;:,.', // Characters from dense to sparse
         sample: 1,
         color: true,
         // Color palette for the ASCII art (dark purples and greys)
@@ -32,7 +32,33 @@ document.addEventListener('DOMContentLoaded', () => {
     video.crossOrigin = 'anonymous';
     video.muted = true;
     video.loop = true;
-    video.src = 'https://assets.codepen.io/605876/firework.mp4';
+    
+    // Use a local video file if available, fallback to the external source
+    const localVideoPath = 'assets/fireworks.mp4';
+    
+    // First try to load the local video
+    fetch(localVideoPath)
+        .then(response => {
+            if (response.ok) {
+                console.log('Using local video file');
+                video.src = localVideoPath;
+            } else {
+                console.log('Local video not found, using external source');
+                video.src = 'https://assets.codepen.io/605876/firework.mp4';
+            }
+        })
+        .catch(error => {
+            console.log('Error checking local video, using external source:', error);
+            video.src = 'https://assets.codepen.io/605876/firework.mp4';
+        });
+    
+    // Set a timeout to ensure video source is set even if fetch fails silently
+    setTimeout(() => {
+        if (!video.src) {
+            console.log('Video source not set after timeout, using default');
+            video.src = localVideoPath;
+        }
+    }, 2000);
     
     // Original video dimensions (16:9 aspect ratio for the fireworks video)
     const videoAspectRatio = 200 / 9;
@@ -162,16 +188,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     const blue = imageData.data[offset + 2];
                     const brightness = (red + green + blue) / 3;
                     
-                    // Only render if brightness is above threshold
-                    if (brightness > 30) {
+                    // Only render if brightness is above threshold (lowered threshold for more visible characters)
+                    if (brightness > 15) {
                         const charIndex = Math.floor((brightness / 256) * config.ascii.length);
                         const char = config.ascii[charIndex] || ' ';
                         
                         // Get color from palette based on brightness
                         const color = getColor(brightness);
                         
-                        // Apply opacity based on brightness
-                        const opacity = Math.min(0.85, brightness / 255 + 0.3);
+                        // Apply opacity based on brightness (increased for better visibility)
+                        const opacity = Math.min(1.0, brightness / 255 + 0.5);
                         
                         ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${opacity})`;
                         ctx.fillText(char, posX, posY + cellHeight);
@@ -195,6 +221,14 @@ document.addEventListener('DOMContentLoaded', () => {
             renderAscii();
         }).catch(error => {
             console.error('Error playing video:', error);
+            // Try to play without user interaction after a delay
+            setTimeout(() => {
+                video.play().catch(e => {
+                    console.error('Second attempt to play video failed:', e);
+                    // Even if video fails to play, still try to render ASCII
+                    renderAscii();
+                });
+            }, 1000);
         });
     }
     
@@ -211,4 +245,13 @@ document.addEventListener('DOMContentLoaded', () => {
             init();
         }
     }, 3000);
+    
+    // Additional fallback - if nothing happens after 5 seconds, force initialization
+    setTimeout(() => {
+        const canvas = document.getElementById('ascii-canvas');
+        if (canvas && !canvas.getContext('2d').getImageData(0, 0, 1, 1).data[3]) {
+            console.log('Forcing ASCII initialization after timeout');
+            init();
+        }
+    }, 5000);
 }); 

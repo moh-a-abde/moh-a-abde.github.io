@@ -46,6 +46,10 @@
     --accent: #a36bff;
     --accent-rgb: 163, 107, 255;
     
+    /* Fonts */
+    --font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --font-family-mono: 'Space Grotesk', monospace;
+    
     /* Elevation */
     --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.25);
@@ -57,8 +61,6 @@
     --transition-very-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     
     /* Typography */
-    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    --font-family-mono: 'Fira Code', monospace;
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
     --font-size-md: 1rem;
@@ -167,7 +169,7 @@ nav ul {
     content: "0" counter(nav-item) ".";
     counter-increment: nav-item;
     color: var(--accent);
-    font-family: var(--font-family-mono);
+    font-family: 'Minecraft', sans-serif !important;
     font-size: var(--font-size-xs);
     margin-right: 5px;
 }
@@ -210,10 +212,9 @@ section {
     position: relative;
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-xl) var(--spacing-lg);
+    padding: var(--spacing-xl) var(--spacing-md);
     overflow: hidden;
     background-color: var(--dark-bg);
 }
@@ -225,10 +226,11 @@ section {
     width: 100%;
     height: 100%;
     z-index: 0;
-    opacity: 0.6;
+    opacity: 0.3;
     pointer-events: none;
-    background-color: rgba(18, 18, 18, 0.9);
+    background-color: transparent;
     object-fit: cover;
+    image-rendering: pixelated; /* Add pixelated rendering for sharper ASCII */
 }
 
 .hero::before {
@@ -351,7 +353,7 @@ section {
     content: "0" counter(section) ".";
     counter-increment: section;
     color: var(--accent);
-    font-family: var(--font-family-mono);
+    font-family: 'Minecraft', sans-serif !important;
     font-size: var(--font-size-lg);
     margin-right: var(--spacing-sm);
     font-weight: normal;
@@ -2426,4 +2428,81 @@ html {
         height: 22px;
         margin-right: calc(var(--spacing-xs) * 0.8);
     }
+}
+
+/* Numeric values with Minecraft font */
+.numeric {
+    font-family: 'Minecraft', sans-serif;
+}
+
+/* Apply Minecraft font to specific elements containing numbers */
+.value-tag.highlight {
+    font-family: 'Minecraft', sans-serif;
+}
+
+.card-count-highlight {
+    font-family: var(--font-family);
+}
+
+.card-count-highlight .numeric {
+    font-family: 'Minecraft', sans-serif;
+}
+
+/* Phone number in contact section */
+.contact-info strong + a,
+.contact-info p strong + span {
+    font-family: 'Minecraft', sans-serif;
+}
+
+/* Years and dates */
+.card-count span:not(.card-count-highlight) {
+    font-family: 'Minecraft', sans-serif;
+}
+
+/* Ensure numbers in value tags use Minecraft font */
+.value-tag:has(span.numeric) {
+    font-family: inherit;
+}
+
+.value-tag span.numeric {
+    font-family: 'Minecraft', sans-serif;
+}
+
+/* Add Minecraft font to all numeric digits */
+.card-count, .detail-value {
+    font-family: var(--font-family);
+}
+
+.card-count span:not(.card-count-highlight):has-text(/\d/),
+.detail-value span:has-text(/\d/) {
+    font-family: 'Minecraft', sans-serif;
+}
+
+/* Copyright year in footer */
+.copyright span.year {
+    font-family: 'Minecraft', sans-serif;
+}
+
+/* Additional numeric elements */
+.numeric-text {
+    font-family: 'Minecraft', sans-serif;
+}
+
+/* GPA values */
+.value-tag.highlight {
+    font-family: 'Minecraft', sans-serif;
+}
+
+/* Override for numeric elements to use Minecraft font */
+.numeric, 
+.value-tag.highlight, 
+.card-count-highlight .numeric,
+.contact-info strong + a,
+.contact-info p strong + span,
+.card-count span:not(.card-count-highlight),
+.value-tag span.numeric,
+.copyright span.year,
+.numeric-text,
+.nav-link::before {
+    font-family: 'Minecraft', sans-serif !important;
 } 
