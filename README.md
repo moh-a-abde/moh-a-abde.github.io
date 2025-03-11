@@ -5,7 +5,7 @@ This is the source code for my personal portfolio website, showcasing my skills,
 ### Demo
 
 <p align="center">
-    <a href="https://moh-a-abde.github.io/gallery79/">
+    <a href="https://moh-a-abde.github.io/gallery79/" target="_blank" rel="noopener noreferrer">
         <img src="demo/banner.png" width="100%">
     </a>
 </p>
