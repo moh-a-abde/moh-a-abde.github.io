@@ -2,38 +2,36 @@
 
 This is the source code for my personal portfolio website, showcasing my skills, projects, and experience.
 
-## Demo
+### Demo
 
-## Demo
-
-### Landing Page
+## Landing Page
 <p align="center">
-    <img src="demo/landing.png" width="85%">
+    <img src="demo/landing.png" width="100%">
 </p>
 
 ---
 
-### About Me
+## About Me
 <p align="center">
-    <img src="demo/aboutme.png" width="85%">
+    <img src="demo/aboutme.png" width="100%">
 </p>
 
 ---
 
-### Tech Stack
+## Tech Stack
 <p align="center">
-    <img src="demo/techstack.png" width="85%">
+    <img src="demo/techstack.png" width="100%">
 </p>
 
 ---
 
-### Preview
+## Preview
 <p align="center">
-    <img src="demo/preview.png" width="85%">
+    <img src="demo/preview.png" width="100%">
 </p>
 
 
-## Features
+# Features
 
 - Responsive design for all devices
 - Interactive UI with animations
@@ -41,6 +39,6 @@ This is the source code for my personal portfolio website, showcasing my skills,
 - Project showcase with modal details
 - Skills and experience sections
 
-## License
+# License
 
 All rights reserved. © Mohamed A. Abdel Hamid.
