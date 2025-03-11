@@ -14,7 +14,7 @@ This is the source code for my personal portfolio website, showcasing my skills,
 ---
 ### Landing Page (Not Signed In)
 <p align="center">
-    <img src="demo/aboutme" width="45%">
+    <img src="demo/aboutme.png" width="45%">
     <img src="demo/preview.png" width="45%">
 </p>
 
@@ -28,4 +28,4 @@ This is the source code for my personal portfolio website, showcasing my skills,
 
 ## License
 
-All rights reserved. © 2024 Mohamed A. Abdel Hamid.
+All rights reserved. © Mohamed A. Abdel Hamid.
