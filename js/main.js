@@ -499,6 +499,358 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Tech Stack Section Enhanced Functionality
+    function initTechStackInteractivity() {
+        const techItems = document.querySelectorAll('.tech-item');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const searchInput = document.getElementById('tech-search-input');
+        const sortSelect = document.getElementById('tech-sort-select');
+        const noResultsMessage = document.querySelector('.no-results-message');
+        
+        // Assign correct categories to each technology item
+        assignTechCategories();
+        
+        // Add 3D tilt effect to tech items
+        addTiltEffectToTechItems();
+        
+        // Add click sound effect
+        const clickSound = createClickSound();
+        
+        // Filter functionality
+        if (filterButtons.length) {
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Toggle active class
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Play subtle click sound
+                    if (clickSound) clickSound.play();
+                    
+                    // Filter items
+                    filterTechItems(filter);
+                });
+            });
+        }
+        
+        // Search functionality
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                filterTechItemsBySearch(searchTerm);
+            });
+        }
+        
+        // Sort functionality
+        if (sortSelect) {
+            sortSelect.addEventListener('change', function() {
+                const sortValue = this.value;
+                sortTechItems(sortValue);
+            });
+        }
+        
+        // Add subtle particle effect around tech items on hover
+        addParticleEffectToTechItems();
+        
+        // Function to determine if any items are visible
+        function checkVisibleItems() {
+            const visibleItems = document.querySelectorAll('.tech-item:not([style*="display: none"])');
+            if (visibleItems.length === 0) {
+                noResultsMessage.style.display = 'block';
+            } else {
+                noResultsMessage.style.display = 'none';
+            }
+        }
+        
+        // Function to filter tech items by category
+        function filterTechItems(category) {
+            techItems.forEach(item => {
+                if (category === 'all') {
+                    item.style.display = '';
+                } else {
+                    const itemCategory = item.getAttribute('data-category');
+                    if (itemCategory === category) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+            });
+            
+            checkVisibleItems();
+        }
+        
+        // Function to filter tech items by search term
+        function filterTechItemsBySearch(searchTerm) {
+            if (searchTerm === '') {
+                techItems.forEach(item => {
+                    item.style.display = '';
+                });
+                
+                // If a filter is active, reapply it
+                const activeFilter = document.querySelector('.filter-btn.active');
+                if (activeFilter) {
+                    const filter = activeFilter.getAttribute('data-filter');
+                    if (filter !== 'all') {
+                        filterTechItems(filter);
+                        return;
+                    }
+                }
+            } else {
+                techItems.forEach(item => {
+                    const techName = item.querySelector('.tech-name').textContent.toLowerCase();
+                    const techDescription = item.querySelector('.tech-description')?.textContent.toLowerCase() || '';
+                    
+                    if (techName.includes(searchTerm) || techDescription.includes(searchTerm)) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+            
+            checkVisibleItems();
+        }
+        
+        // Function to sort tech items
+        function sortTechItems(sortType) {
+            const techGrid = document.querySelector('.tech-stack-grid');
+            const items = Array.from(techItems);
+            
+            switch (sortType) {
+                case 'name-asc':
+                    items.sort((a, b) => {
+                        const nameA = a.querySelector('.tech-name').textContent;
+                        const nameB = b.querySelector('.tech-name').textContent;
+                        return nameA.localeCompare(nameB);
+                    });
+                    break;
+                case 'name-desc':
+                    items.sort((a, b) => {
+                        const nameA = a.querySelector('.tech-name').textContent;
+                        const nameB = b.querySelector('.tech-name').textContent;
+                        return nameB.localeCompare(nameA);
+                    });
+                    break;
+                case 'experience':
+                    items.sort((a, b) => {
+                        const expA = a.getAttribute('data-experience') || '';
+                        const expB = b.getAttribute('data-experience') || '';
+                        const expRank = { 'beginner': 1, 'intermediate': 2, 'advanced': 3, 'expert': 4 };
+                        return expRank[expB] - expRank[expA];
+                    });
+                    break;
+                default:
+                    items.sort((a, b) => {
+                        const delayA = parseInt(a.getAttribute('data-delay') || '0');
+                        const delayB = parseInt(b.getAttribute('data-delay') || '0');
+                        return delayA - delayB;
+                    });
+            }
+            
+            // Reappend sorted items
+            items.forEach(item => techGrid.appendChild(item));
+        }
+        
+        // Function to assign categories to technology items
+        function assignTechCategories() {
+            // Define technology categories
+            const categories = {
+                frontend: [
+                    'HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Vue', 'Angular', 'Next', 'Svelte', 'Hugo',
+                    'Tailwind', 'Bootstrap', 'Sass', 'Less'
+                ],
+                backend: [
+                    'Node', 'Express', 'Spring', 'Django', 'Flask', 'Ruby', 'Rails', 'PHP', 'Laravel', 'ASP.NET',
+                    'PostgreSQL', 'MySQL', 'MongoDB', 'Cassandra', 'Derby', 'Oracle'
+                ],
+                language: [
+                    'JavaScript', 'TypeScript', 'Python', 'Java', 'C', 'C++', 'C#', 'Rust', 'Go', 'Kotlin', 
+                    'Swift', 'Dart', 'R', 'Ruby', 'PHP', 'Bash'
+                ],
+                devops: [
+                    'Git', 'Docker', 'Kubernetes', 'Jenkins', 'AWS', 'Azure', 'GCP', 'Linux', 'Bash', 
+                    'Ansible', 'Terraform', 'Maven', 'Gradle', 'Cargo', 'Kafka', 'Apache'
+                ]
+            };
+            
+            // Set categories based on technology name
+            techItems.forEach(item => {
+                const techName = item.querySelector('.tech-name').textContent;
+                
+                // Check what categories this technology falls into
+                let assignedCategory = 'other';
+                
+                for (const [category, technologies] of Object.entries(categories)) {
+                    if (technologies.some(tech => techName.includes(tech))) {
+                        assignedCategory = category;
+                        break;
+                    }
+                }
+                
+                item.setAttribute('data-category', assignedCategory);
+            });
+        }
+        
+        // Function to add tilt effect to tech items
+        function addTiltEffectToTechItems() {
+            techItems.forEach(item => {
+                item.addEventListener('mousemove', function(e) {
+                    const boundingRect = this.getBoundingClientRect();
+                    const mouseX = e.clientX - boundingRect.left;
+                    const mouseY = e.clientY - boundingRect.top;
+                    
+                    // Calculate rotation based on mouse position
+                    const centerX = boundingRect.width / 2;
+                    const centerY = boundingRect.height / 2;
+                    
+                    // Limit tilt angle
+                    const maxTilt = 10;
+                    const tiltX = ((mouseY - centerY) / centerY) * maxTilt;
+                    const tiltY = ((mouseX - centerX) / centerX) * maxTilt;
+                    
+                    // Apply transform
+                    this.style.transform = `perspective(1000px) rotateX(${-tiltX}deg) rotateY(${tiltY}deg) translateZ(10px) scale(1.05)`;
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    // Reset transform
+                    this.style.transform = '';
+                });
+            });
+        }
+        
+        // Function to create a subtle click sound
+        function createClickSound() {
+            if (typeof Audio !== 'undefined') {
+                const sound = new Audio();
+                sound.volume = 0.2; // Low volume
+                
+                // Try to set multiple sources for better browser compatibility
+                try {
+                    sound.src = 'data:audio/mp3;base64,SUQzAwAAAAABkFRJVDIAAAAZAAAAaHR0cDovL3d3dy5mcmVlc2Z4LmNvLnVrVElUMgAAABkAAABodHRwOi8vd3d3LmZyZWVzZnguY28udWtUQUxCAAAAGQAAAGh0dHA6Ly93d3cuZnJlZXNmeC5jby51a1RZRVIAAAAFAAAAMjAxMFRDT04AAAAFAAAAU0ZYAFRDT00AAAAVAAAAc291bmQgZWZmZWN0cyBzYW1wbGVzQ09NTQAAACEAAABlbnYuY2xpY2sgc291bmQgZGVzaWduZWQgYnkgc3Z4VFBFMQAAABQAAAB3d3cuZnJlZXNmeC5jby51awAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/7kGQAD/AAAGkAAAAIAAANIAAAAQAAAaQAAAAgAAA0gAAABExBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7kmRAj/AAAGkAAAAIAAANIAAAAQAAAaQAAAAgAAA0gAAABExBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVU=';
+                    return sound;
+                } catch (e) {
+                    console.log('Sound creation error:', e);
+                    return null;
+                }
+            }
+            return null;
+        }
+        
+        // Function to add subtle particle effect around tech items
+        function addParticleEffectToTechItems() {
+            techItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    // Create particles container if it doesn't exist
+                    let particlesContainer = document.querySelector('.tech-particles-container');
+                    
+                    if (!particlesContainer) {
+                        particlesContainer = document.createElement('div');
+                        particlesContainer.classList.add('tech-particles-container');
+                        document.querySelector('.tech-stack-section').appendChild(particlesContainer);
+                        
+                        // Style the container
+                        particlesContainer.style.position = 'absolute';
+                        particlesContainer.style.top = '0';
+                        particlesContainer.style.left = '0';
+                        particlesContainer.style.width = '100%';
+                        particlesContainer.style.height = '100%';
+                        particlesContainer.style.pointerEvents = 'none';
+                        particlesContainer.style.overflow = 'hidden';
+                        particlesContainer.style.zIndex = '1';
+                    }
+                    
+                    // Get position of the tech item
+                    const rect = this.getBoundingClientRect();
+                    const sectionRect = document.querySelector('.tech-stack-section').getBoundingClientRect();
+                    
+                    // Create 5-10 particles
+                    const numParticles = Math.floor(Math.random() * 6) + 5;
+                    
+                    for (let i = 0; i < numParticles; i++) {
+                        createParticle(
+                            rect.left - sectionRect.left + rect.width / 2, 
+                            rect.top - sectionRect.top + rect.height / 2,
+                            particlesContainer
+                        );
+                    }
+                });
+            });
+        }
+        
+        // Helper function to create a single particle
+        function createParticle(x, y, container) {
+            const particle = document.createElement('div');
+            particle.classList.add('tech-particle');
+            
+            // Style the particle
+            particle.style.position = 'absolute';
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+            particle.style.width = `${Math.random() * 4 + 2}px`;
+            particle.style.height = particle.style.width;
+            particle.style.backgroundColor = `hsl(${240 + Math.random() * 60}, 100%, 70%)`;
+            particle.style.borderRadius = '50%';
+            particle.style.opacity = '0.8';
+            particle.style.boxShadow = `0 0 10px ${particle.style.backgroundColor}`;
+            particle.style.zIndex = '1';
+            
+            // Add to container
+            container.appendChild(particle);
+            
+            // Animate the particle
+            const angle = Math.random() * Math.PI * 2;
+            const speed = Math.random() * 30 + 20;
+            const tx = Math.cos(angle) * speed;
+            const ty = Math.sin(angle) * speed;
+            
+            // Use Web Animation API if available, fallback to CSS animation
+            if (particle.animate) {
+                particle.animate([
+                    { transform: 'translate(0, 0) scale(1)', opacity: 0.8 },
+                    { transform: `translate(${tx}px, ${ty}px) scale(0)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 1000 + 500,
+                    easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                }).onfinish = () => {
+                    particle.remove();
+                };
+            } else {
+                // Fallback to setTimeout
+                setTimeout(() => {
+                    particle.remove();
+                }, 1500);
+            }
+        }
+    }
+
+    // Mobile menu functionality
+    function initMobileMenu() {
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const nav = document.querySelector('nav ul');
+        
+        if (mobileMenuBtn && nav) {
+            mobileMenuBtn.addEventListener('click', function() {
+                nav.classList.toggle('active');
+                mobileMenuBtn.classList.toggle('active');
+            });
+            
+            // Close menu when clicking on a link
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        nav.classList.remove('active');
+                        mobileMenuBtn.classList.remove('active');
+                    }
+                });
+            });
+        }
+    }
+
     // Initialize all functions
     function init() {
         initMobileMenu();
@@ -508,6 +860,7 @@ document.addEventListener('DOMContentLoaded', () => {
         createParticles();
         observeTechStackSection();
         initAvatarFlip();
+        initTechStackInteractivity();
         
         // Event listeners
         window.addEventListener('scroll', function() {

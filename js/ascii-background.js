@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
         color: true,
         // Color palette for the ASCII art (dark purples and greys)
         colorPalette: [
+            { r: 50, g: 33, b: 109 },  // Darker purple
             { r: 74, g: 20, b: 140 },  // Dark purple
             { r: 94, g: 53, b: 177 },  // Medium purple
-            { r: 113, g: 75, b: 181 }, // Light purple
             { r: 58, g: 58, b: 60 },   // Dark grey
             { r: 88, g: 88, b: 91 }    // Medium grey
         ]
@@ -33,32 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
     video.muted = true;
     video.loop = true;
     
-    // Use a local video file if available, fallback to the external source
-    const localVideoPath = 'assets/fireworks.mp4';
-    
-    // First try to load the local video
-    fetch(localVideoPath)
-        .then(response => {
-            if (response.ok) {
-                console.log('Using local video file');
-                video.src = localVideoPath;
-            } else {
-                console.log('Local video not found, using external source');
-                video.src = 'https://assets.codepen.io/605876/firework.mp4';
-            }
-        })
-        .catch(error => {
-            console.log('Error checking local video, using external source:', error);
-            video.src = 'https://assets.codepen.io/605876/firework.mp4';
-        });
-    
-    // Set a timeout to ensure video source is set even if fetch fails silently
-    setTimeout(() => {
-        if (!video.src) {
-            console.log('Video source not set after timeout, using default');
-            video.src = localVideoPath;
-        }
-    }, 2000);
+    // Use external source directly to avoid CORS issues when running locally
+    // Local video path would only work when served from a proper web server
+    const videoSrc = 'https://assets.codepen.io/605876/firework.mp4';
+    video.src = videoSrc;
+    console.log('Using external video source');
     
     // Original video dimensions (16:9 aspect ratio for the fireworks video)
     const videoAspectRatio = 200 / 9;
@@ -81,11 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Brighter pixels get more purple tones, darker pixels get grey tones
         let colorIndex;
         if (brightness > 200) {
-            colorIndex = 2; // Light purple for brightest spots
+            colorIndex = 2; // Medium purple for brightest spots
         } else if (brightness > 150) {
-            colorIndex = 1; // Medium purple
+            colorIndex = 1; // Dark purple
         } else if (brightness > 100) {
-            colorIndex = 0; // Dark purple
+            colorIndex = 0; // Darkest purple
         } else if (brightness > 50) {
             colorIndex = 3; // Dark grey
         } else {

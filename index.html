@@ -75,197 +75,763 @@
 
     <section class="tech-stack-section">
         <div class="animated-title-container">
-            <h2 class="tech-stack-title">Technologies I work with</h2>
+            <h2 class="tech-stack-title" data-text="TECH STACK"><img src="assets/techstack.png" alt="TECH STACK" class="tech-stack-image"></h2>
         </div>
+        
+        <div class="tech-filter-container">
+            <div class="tech-search">
+                <input type="text" id="tech-search-input" placeholder="Search technologies...">
+                <span class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </span>
+            </div>
+            
+            <div class="tech-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="frontend">Frontend</button>
+                <button class="filter-btn" data-filter="backend">Backend</button>
+                <button class="filter-btn" data-filter="language">Languages</button>
+                <button class="filter-btn" data-filter="devops">DevOps</button>
+            </div>
+            
+            <div class="tech-sort">
+                <select id="tech-sort-select">
+                    <option value="default">Default</option>
+                    <option value="name-asc">Name (A-Z)</option>
+                    <option value="name-desc">Name (Z-A)</option>
+                    <option value="experience">Experience Level</option>
+                </select>
+                <div class="sort-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l4-4 4 4m-8 6l4 4 4-4"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
         <div class="tech-stack-container">
             <div class="tech-stack-grid">
-                <a href="https://gohugo.io/" class="tech-item" target="_blank" data-delay="0">
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="0">
+                    <a href="https://gohugo.io/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hugo/hugo-original.svg" alt="Hugo">
                     </div>
                     <span class="tech-name">Hugo</span>
-                </a>
-                <a href="https://reactjs.org/" class="tech-item" target="_blank" data-delay="100">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Static site generator based on Go</p>
+                            <span class="tech-projects">3 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="100">
+                    <a href="https://reactjs.org/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
                     </div>
                     <span class="tech-name">React</span>
-                </a>
-                <a href="https://nextjs.org/" class="tech-item" target="_blank" data-delay="200">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                </div>
+                                <span class="experience-label">Expert</span>
+                            </div>
+                            <p class="tech-description">JavaScript library for building user interfaces</p>
+                            <span class="tech-projects">8 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="200">
+                    <a href="https://nextjs.org/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="NextJS" style="filter: invert(1);">
                     </div>
                     <span class="tech-name">NextJS</span>
-                </a>
-                <a href="https://vuejs.org/" class="tech-item" target="_blank" data-delay="300">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Advanced</span>
+                            </div>
+                            <p class="tech-description">React framework with server-side rendering</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="300">
+                    <a href="https://vuejs.org/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue">
                     </div>
                     <span class="tech-name">Vue</span>
-                </a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" class="tech-item" target="_blank" data-delay="400">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">JavaScript framework for building user interfaces</p>
+                            <span class="tech-projects">4 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="400">
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
                     </div>
                     <span class="tech-name">HTML</span>
-                </a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" class="tech-item" target="_blank" data-delay="500">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Expert</span>
+                            </div>
+                            <p class="tech-description">Markup language for structuring web pages</p>
+                            <span class="tech-projects">10 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="500">
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS">
                     </div>
                     <span class="tech-name">CSS</span>
-                </a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" class="tech-item" target="_blank" data-delay="600">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Expert</span>
+                            </div>
+                            <p class="tech-description">Style sheet language for describing the presentation of a document</p>
+                            <span class="tech-projects">10 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="600">
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
                     </div>
                     <span class="tech-name">JavaScript</span>
-                </a>
-                <a href="https://www.typescriptlang.org/" class="tech-item" target="_blank" data-delay="650">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Expert</span>
+                            </div>
+                            <p class="tech-description">Programming language for web development</p>
+                            <span class="tech-projects">12 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="650">
+                    <a href="https://www.typescriptlang.org/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript">
                     </div>
                     <span class="tech-name">TypeScript</span>
-                </a>
-                <a href="https://git-scm.com/" class="tech-item" target="_blank" data-delay="700">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Superset of JavaScript for static typing</p>
+                            <span class="tech-projects">6 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="700">
+                    <a href="https://git-scm.com/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
                     </div>
                     <span class="tech-name">Git</span>
-                </a>
-                <a href="https://www.java.com/" class="tech-item" target="_blank" data-delay="800">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Expert</span>
+                            </div>
+                            <p class="tech-description">Distributed version control system</p>
+                            <span class="tech-projects">10 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="800">
+                    <a href="https://www.java.com/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
                     </div>
                     <span class="tech-name">Java</span>
-                </a>
-                <a href="https://spring.io/" class="tech-item" target="_blank" data-delay="900">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Expert</span>
+                            </div>
+                            <p class="tech-description">High-level programming language</p>
+                            <span class="tech-projects">10 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="900">
+                    <a href="https://spring.io/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring">
                     </div>
                     <span class="tech-name">Spring</span>
-                </a>
-                <a href="https://expressjs.com/" class="tech-item" target="_blank" data-delay="1000">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Framework for building Java applications</p>
+                            <span class="tech-projects">6 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="1000">
+                    <a href="https://expressjs.com/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express" style="filter: invert(1);">
                     </div>
                     <span class="tech-name">Express</span>
-                </a>
-                <a href="https://www.postgresql.org/" class="tech-item" target="_blank" data-delay="1100">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Web framework for Node.js</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="1100">
+                    <a href="https://www.postgresql.org/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
                     </div>
                     <span class="tech-name">PostgreSQL</span>
-                </a>
-                <a href="https://www.markdownguide.org/" class="tech-item" target="_blank" data-delay="1200">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Open-source relational database management system</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="1200">
+                    <a href="https://www.markdownguide.org/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/markdown/markdown-original.svg" alt="Markdown">
                     </div>
                     <span class="tech-name">Markdown</span>
-                </a>
-                <a href="https://www.python.org/" class="tech-item" target="_blank" data-delay="1300">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Expert</span>
+                            </div>
+                            <p class="tech-description">Lightweight markup language</p>
+                            <span class="tech-projects">10 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="1300">
+                    <a href="https://www.python.org/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
                     </div>
                     <span class="tech-name">Python</span>
-                </a>
-                <a href="https://isocpp.org/" class="tech-item" target="_blank" data-delay="1400">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Expert</span>
+                            </div>
+                            <p class="tech-description">High-level programming language</p>
+                            <span class="tech-projects">10 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="1400">
+                    <a href="https://isocpp.org/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C/C++">
                     </div>
                     <span class="tech-name">C/C++</span>
-                </a>
-                <a href="https://www.rust-lang.org/" class="tech-item" target="_blank" data-delay="1500">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Expert</span>
+                            </div>
+                            <p class="tech-description">High-level programming languages</p>
+                            <span class="tech-projects">10 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="1500">
+                    <a href="https://www.rust-lang.org/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://dtnavi.tcdigital.jp/dev_blog/wp-content/uploads/2023/09/rustacean-flat-gesture.png" alt="Rust">
                     </div>
                     <span class="tech-name">Rust</span>
-                </a>
-                <a href="https://flutter.dev/" class="tech-item" target="_blank" data-delay="1600">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Systems programming language</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="1600">
+                    <a href="https://flutter.dev/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter">
                     </div>
                     <span class="tech-name">Flutter</span>
-                </a>
-                <a href="https://dart.dev/" class="tech-item" target="_blank" data-delay="1700">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">UI software development kit</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="1700">
+                    <a href="https://dart.dev/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart">
                     </div>
                     <span class="tech-name">Dart</span>
-                </a>
-                <a href="https://www.r-project.org/" class="tech-item" target="_blank" data-delay="1800">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Client-optimized language for fast apps</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="1800">
+                    <a href="https://www.r-project.org/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" alt="R">
                     </div>
                     <span class="tech-name">R</span>
-                </a>
-                <a href="https://www.gnu.org/software/bash/" class="tech-item" target="_blank" data-delay="1900">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Programming language and software environment</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="1900">
+                    <a href="https://www.gnu.org/software/bash/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="Bash">
                     </div>
                     <span class="tech-name">Bash</span>
-                </a>
-                <a href="https://www.php.net/" class="tech-item" target="_blank" data-delay="2000">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Unix shell</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="2000">
+                    <a href="https://www.php.net/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
                     </div>
                     <span class="tech-name">PHP</span>
-                </a>
-                <a href="https://www.docker.com/" class="tech-item" target="_blank" data-delay="2100">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Server-side scripting language</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="2100">
+                    <a href="https://www.docker.com/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
                     </div>
                     <span class="tech-name">Docker</span>
-                </a>
-                <a href="https://www.linux.org/" class="tech-item" target="_blank" data-delay="2200">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Platform for developing, shipping, and running applications</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="2200">
+                    <a href="https://www.linux.org/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux">
                     </div>
                     <span class="tech-name">Linux</span>
-                </a>
-                <a href="https://nodejs.org/" class="tech-item" target="_blank" data-delay="2300">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Expert</span>
+                            </div>
+                            <p class="tech-description">Operating system kernel</p>
+                            <span class="tech-projects">10 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="2300">
+                    <a href="https://nodejs.org/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
                     </div>
                     <span class="tech-name">Node.js</span>
-                </a>
-                <a href="https://crates.io/" class="tech-item" target="_blank" data-delay="2400">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">JavaScript runtime environment</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="2400">
+                    <a href="https://crates.io/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://doc.rust-lang.org/cargo/images/Cargo-Logo-Small.png" alt="Cargo" style="object-fit: contain;">
                     </div>
                     <span class="tech-name">Cargo</span>
-                </a>
-                <a href="https://www.mysql.com/" class="tech-item" target="_blank" data-delay="2500">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Rust package manager</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="2500">
+                    <a href="https://www.mysql.com/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
                     </div>
                     <span class="tech-name">MySQL</span>
-                </a>
-                <a href="https://db.apache.org/derby/" class="tech-item" target="_blank" data-delay="2600">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Open-source relational database management system</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="2600">
+                    <a href="https://db.apache.org/derby/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://db.apache.org/derby/logo/final_logo.png" alt="Apache Derby" style="object-fit: contain;">
                     </div>
                     <span class="tech-name">Apache Derby</span>
-                </a>
-                <a href="https://cassandra.apache.org/" class="tech-item" target="_blank" data-delay="2700">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Open-source relational database management system</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="2700">
+                    <a href="https://cassandra.apache.org/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cassandra/cassandra-original.svg" alt="Cassandra">
                     </div>
                     <span class="tech-name">Cassandra</span>
-                </a>
-                <a href="https://maven.apache.org/" class="tech-item" target="_blank" data-delay="2800">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Distributed database management system</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="2800">
+                    <a href="https://maven.apache.org/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" alt="Maven">
                     </div>
                     <span class="tech-name">Maven</span>
-                </a>
-                <a href="https://kafka.apache.org/" class="tech-item" target="_blank" data-delay="2900">
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Build automation tool for Java projects</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="tech-item" data-category="frontend" data-experience="expert" data-delay="2900">
+                    <a href="https://kafka.apache.org/" class="tech-item-link" target="_blank">
                     <div class="tech-icon">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg" alt="Apache Kafka">
                     </div>
                     <span class="tech-name">Apache Kafka</span>
+                        <div class="tech-detail">
+                            <div class="tech-experience">
+                                <div class="experience-level">
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot filled"></div>
+                                    <div class="level-dot"></div>
+                                    <div class="level-dot"></div>
+                                </div>
+                                <span class="experience-label">Intermediate</span>
+                            </div>
+                            <p class="tech-description">Distributed streaming platform</p>
+                            <span class="tech-projects">5 projects</span>
+                        </div>
                 </a>
             </div>
+                
+            </div>
+        </div>
+        
+        <div class="no-results-message" style="display: none;">
+            <p>No technologies found matching your search criteria.</p>
         </div>
     </section>
 
