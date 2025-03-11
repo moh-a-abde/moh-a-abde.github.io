@@ -4,6 +4,11 @@ This is the source code for my personal portfolio website, showcasing my skills,
 
 ### Demo
 
+<p align="center">
+    <img src="demo/banner.png" width="100%">
+</p>
+
+---
 ## Landing Page
 <p align="center">
     <img src="demo/landing.png" width="100%">
