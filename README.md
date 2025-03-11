@@ -6,17 +6,32 @@ This is the source code for my personal portfolio website, showcasing my skills,
 
 ## Demo
 
-### Landing Page (Not Signed In)
+### Landing Page
 <p align="center">
-    <img src="demo/landing.png" width="45%">
-    <img src="demo/techstack.png" width="45%">
+    <img src="demo/landing.png" width="85%">
 </p>
+
 ---
-### Landing Page (Not Signed In)
+
+### About Me
 <p align="center">
-    <img src="demo/aboutme.png" width="45%">
-    <img src="demo/preview.png" width="45%">
+    <img src="demo/aboutme.png" width="85%">
 </p>
+
+---
+
+### Tech Stack
+<p align="center">
+    <img src="demo/techstack.png" width="85%">
+</p>
+
+---
+
+### Preview
+<p align="center">
+    <img src="demo/preview.png" width="85%">
+</p>
+
 
 ## Features
 
